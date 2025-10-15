@@ -32,43 +32,6 @@ The `Sky()` function prepares a **pairwise preference dataset** used for **Direc
 It converts raw conversation data (stored as a Parquet file) into a **structured, model-ready dataset** with clear question–answer pairs and preference labels.
 
 ---
-
-### 🔍 Step-by-Step Summary
-
-1. **Load Raw Data**
-   - Loads a `.parquet` file containing conversational examples.
-   - Each record includes two candidate responses:  
-     one *preferred* (`chosen`) and one *rejected*.
-
-2. **Template Formatting**
-   - Wraps each question and its two answers into a **standard evaluation prompt** in Chinese.  
-     The format looks like:
-     ```
-     作为一个评价专家，给定一个问题和它的两个可能的回答...
-     问题：<question>
-     回答1：<answer_1>
-     回答2：<answer_2>
-     ```
-   - This consistent structure is critical for alignment and evaluation.
-
-3. **Randomized Pairing**
-   - Randomly swaps the “chosen” and “rejected” responses 50% of the time  
-     → ensures that the model learns *true preference reasoning*, not fixed order bias.
-
-4. **Field Construction**
-   - Builds a new dataset with structured fields:
-     - `prompt`: full evaluation text (question + both answers)
-     - `q`: question
-     - `r1`, `r2`: two possible answers
-     - `chosen`: numeric label (1 or 2) indicating the better answer
-     - `tag`, `test_id`, `gen`: metadata for downstream tasks
-
-5. **Dataset Saving**
-   - Converts the processed data into a `datasets.DatasetDict` object.
-   - Saves it locally (using Hugging Face `save_to_disk`) to `SAVE_DIR`.
-
----
-
 ### 💡 Purpose
 
 This step produces the **pairwise preference dataset** required for training and evaluating DPO models.  
