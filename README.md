@@ -18,6 +18,7 @@ You do **not** need a `requirements.txt` or `uv.lock` file; everything is specif
 git clone https://github.com/VectorInstitute/AIXpert-preference-alignment.git
 cd AIXpert-preference-alignment
 
+```
 ### 🛠️ 2️⃣ Create and Sync the Environment
 
 Run the following command to automatically create a virtual environment and install all dependencies:
@@ -25,7 +26,7 @@ Run the following command to automatically create a virtual environment and inst
 ```bash
 uv sync
 source .venv/bin/activate
-
+```
 ## 🧮 Dataset Construction – `Sky()` Function Overview - preprocess_dataset.py
 
 The `Sky()` function prepares a **pairwise preference dataset** used for **Direct Preference Optimization (DPO)** fine-tuning.  
@@ -84,7 +85,7 @@ Once your environment is set up:
 
 ```bash
 uv run inference_best_of_n.py
-
+```
 ## 🧩 Inference – All Template Generation (Hint Sampling)
 
 Once `inference_best_of_n.py` has generated the multi-sample outputs,  
@@ -99,7 +100,7 @@ It also includes built-in checkpointing and resume capabilities for long runs.
 
 ```bash
 uv run inference_all.py
-
+```
 ## 🧹 Post-Processing
 
 After generating the structured outputs (`guide.jsonl`, `guide_reverse.jsonl`, and `output.jsonl`) from the inference scripts,  
@@ -111,7 +112,7 @@ this script performs **final cleanup and reindexing** to ensure that all generat
 
 ```bash
 uv run post_processing.py
-
+```
 ## 🧱 DPO Dataset Construction
 
 After cleaning and aligning the inference outputs, this script **constructs the final dataset** required for **Direct Preference Optimization (DPO)** fine-tuning.  
@@ -123,7 +124,7 @@ It parses the model’s reasoning outputs, identifies preference-aligned samples
 
 ```bash
 uv run construct_dpo_dataset.py
-
+```
 ## 📊 DPO Dataset Inspection 
 
 After constructing the DPO dataset using `construct_dpo_dataset.py`,  
@@ -135,7 +136,7 @@ this script provides a **quick inspection and summary** of the saved dataset —
 
 ```bash
 uv run dpo_dataset.py
-
+```
 ## 🧠 Direct Preference Optimization Training 
 This script performs **Direct Preference Optimization (DPO)** fine-tuning on the constructed dataset using **Qwen2-7B-Instruct**.  
 It aligns the model’s responses with human-preferred outputs by learning from **(chosen, rejected)** pairs generated earlier.
@@ -146,7 +147,7 @@ It aligns the model’s responses with human-preferred outputs by learning from 
 
 ```bash
 uv run dpo_training.py
-
+```
 ## 📊 Model Evaluation Script 
 
 This script evaluates the **Direct Preference Optimization (DPO)** fine-tuned model against the **base model (Qwen2-7B-Instruct)** on the validation split of the dataset.  
@@ -158,3 +159,4 @@ It measures how well each model predicts the **preferred (chosen)** answers from
 
 ```bash
 uv run accuracy.py
+```
