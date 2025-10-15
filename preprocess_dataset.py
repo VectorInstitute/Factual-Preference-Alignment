@@ -13,8 +13,8 @@ np.random.seed(seed)
 torch.manual_seed(seed)
 torch.cuda.manual_seed_all(seed)
 
-PARQUET_PATH = "/projects/aixpert/users/sindhu/Con-J/src/data/train-00000-of-00001.parquet"
-SAVE_DIR = "/projects/aixpert/users/sindhu/Con-J/src/data/pairwise_critic_inference2_get_answer/Sky"
+PARQUET_PATH = "/data/train-00000-of-00001.parquet"
+SAVE_DIR = "/data/pairwise_critic_inference2_get_answer/Sky"
 
 def Sky():
     # Load from a single parquet file instead of load_from_disk()
