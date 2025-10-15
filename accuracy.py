@@ -1,6 +1,5 @@
 import re
 import json
-import random
 import torch
 from datasets import load_from_disk
 from transformers import AutoTokenizer, AutoModelForCausalLM
@@ -9,11 +8,10 @@ from transformers import AutoTokenizer, AutoModelForCausalLM
 # Config
 # -----------------------------
 base_model_name = "Qwen/Qwen2-7B-Instruct"
-dpo_model_path = "/projects/aixpert/users/sindhu/Con-J/src/outputs/qwen2_dpo_full"
+dpo_model_path = "/projects/aixpert/users/sindhu/Con-J/src/outputs/qwen2_dpo_full_epoch_5"
 dataset_path = "/projects/aixpert/users/sindhu/Con-J/src/dpo_dataset"
-max_prompt_tokens = 4096
+max_prompt_tokens = 32768   # full context window for Qwen2-7B
 max_new_tokens = 256
-sample_limit = 5  # number of samples to test
 
 # -----------------------------
 # Load tokenizer & models
@@ -42,7 +40,8 @@ dpo_model = load_model(dpo_model_path)
 # Load validation data
 # -----------------------------
 dataset = load_from_disk(dataset_path)
-test_data = dataset["validation"].shuffle(seed=42).select(range(sample_limit))
+test_data = dataset["validation"]
+print(f"✅ Loaded validation dataset with {len(test_data)} samples.")
 
 # -----------------------------
 # Helper: extract Q/A pairs
@@ -98,20 +97,19 @@ def run_inference(model, q, a1, a2, name="model"):
         f"Output JSON:"
     )
 
-    # Tokenize with explicit truncation
+    # Tokenize (no truncation)
     inputs = tokenizer(
         prompt,
         return_tensors="pt",
-        truncation=True,
-        max_length=max_prompt_tokens,
+        truncation=False,
         padding=False,
     ).to(model.device)
-    input_len = inputs["input_ids"].shape[-1]
-    print(f"  🔹 [{name}] prompt tokens: {input_len}")
 
-    # Skip too-long prompts
-    if input_len > max_prompt_tokens - max_new_tokens:
-        return "[SKIPPED: prompt too long]"
+    input_len = inputs["input_ids"].shape[-1]
+    print(f"  🔹 [{name}] Input length: {input_len} tokens")
+
+    if input_len > max_prompt_tokens:
+        print(f"⚠️ [{name}] Input exceeds {max_prompt_tokens} tokens! Consider chunking.")
 
     with torch.inference_mode():
         outputs = model.generate(
@@ -122,39 +120,26 @@ def run_inference(model, q, a1, a2, name="model"):
             pad_token_id=tokenizer.eos_token_id,
         )
 
-    # Decode only new tokens beyond the prompt
     new_tokens = outputs[0][input_len:]
     decoded = tokenizer.decode(new_tokens, skip_special_tokens=True).strip()
     return decoded
 
 # -----------------------------
-# Main loop
+# Main loop: evaluate all samples
 # -----------------------------
 results = []
+base_correct = 0
+dpo_correct = 0
+total = 0
 
-print("\n🔍 Starting inference comparison...\n")
+print("\n🔍 Starting full validation evaluation (no truncation)...\n")
 for i, sample in enumerate(test_data):
-    # ✅ Print chosen_id if present
-    chosen_id = sample.get("chosen_id", None)
-    if chosen_id is not None:
-        print(f"🆔 Chosen ID: {chosen_id}")
     conv_text = sample["conversations"][0]["value"]
+    chosen_id = sample.get("chosen_id", None)
     q, a1, a2 = extract_qa(conv_text)
 
     if not q or not a1 or not a2:
-        print(f"⚠️ Skipping sample {i+1}: incomplete question or answer.")
         continue
-
-    word_count = len(a1.split()) + len(a2.split())
-    if word_count > 1000:
-        print(f"⚠️ Skipping sample {i+1}: too long ({word_count} words total).")
-        continue
-
-    print(f"\n=== SAMPLE {i+1} ===")
-    print(f"Q: {q}...")
-    print(f"A1 len={len(a1)}, A2 len={len(a2)}")
-    print(f"A1: {a1}...")
-    print(f"A2: {a2}...")
 
     base_out = run_inference(base_model, q, a1, a2, "Base")
     dpo_out = run_inference(dpo_model, q, a1, a2, "DPO")
@@ -162,21 +147,44 @@ for i, sample in enumerate(test_data):
     base_json = safe_parse_json(base_out)
     dpo_json = safe_parse_json(dpo_out)
 
-    print("🧠 Base Model →", base_json)
-    print("🎯 DPO Model  →", dpo_json)
+    base_pred = base_json.get("better_answer")
+    dpo_pred = dpo_json.get("better_answer")
+
+    total += 1
+    if base_pred == chosen_id:
+        base_correct += 1
+    if dpo_pred == chosen_id:
+        dpo_correct += 1
 
     results.append({
+        "index": i + 1,
+        "chosen_id": chosen_id,
         "question": q,
         "base_output": base_json,
         "dpo_output": dpo_json,
-        "chosen_id": chosen_id,
+        "base_pred": base_pred,
+        "dpo_pred": dpo_pred
     })
+
+# -----------------------------
+# Compute Accuracy
+# -----------------------------
+base_acc = round(base_correct / total * 100, 2) if total > 0 else 0
+dpo_acc = round(dpo_correct / total * 100, 2) if total > 0 else 0
+
+print(f"\n✅ Evaluation complete on {total} samples")
+print(f"📊 Base Model Accuracy: {base_acc}%")
+print(f"📈 DPO Model Accuracy: {dpo_acc}%")
 
 # -----------------------------
 # Save results
 # -----------------------------
-output_path = "dpo_eval_results.json"
+output_path = "dpo_eval_results_full_no_trunc.json"
 with open(output_path, "w") as f:
-    json.dump(results, f, indent=2)
+    json.dump({
+        "base_accuracy": base_acc,
+        "dpo_accuracy": dpo_acc,
+        "results": results
+    }, f, indent=2)
 
-print(f"\n✅ Inference complete. Results saved to {output_path}")
+print(f"\n📁 Results saved to {output_path}")

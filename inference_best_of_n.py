@@ -154,9 +154,9 @@ def generate_jsonl(
 # Main
 # ==============================
 def main():
-    input_path = "/outputs/input.jsonl"
-    output_path = "/outputs/output.jsonl"
-    checkpoint_dir = "/outputs/checkpoint_output/"
+    input_path = "/projects/aixpert/users/sindhu/Con-J/src/outputs/input.jsonl"
+    output_path = "/projects/aixpert/users/sindhu/Con-J/src/outputs/output.jsonl"
+    checkpoint_dir = "/projects/aixpert/users/sindhu/Con-J/src/outputs/checkpoint_output/"
 
     model_id = "Qwen/Qwen2-7B-Instruct"
 

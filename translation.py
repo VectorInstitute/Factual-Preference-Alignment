@@ -18,7 +18,7 @@ config = Config()
 client = OpenAI(api_key=config.OPENAI_API_KEY)
 
 
-dataset_path = "/projects/aixpert/users/sindhu/Con-J/src/data/pairwise_critic_inference2_get_answer/Sky"
+dataset_path = "/data/pairwise_critic_inference2_get_answer/Sky"
 dataset = load_from_disk(dataset_path)["train"]
 subset = dataset.select(range(5000))  # process first 1000
 
