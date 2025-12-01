@@ -116,11 +116,9 @@ source = { editable = "." }
 dependencies = [
     { name = "accelerate" },
     { name = "aiofiles" },
-    { name = "bitsandbytes" },
     { name = "build" },
     { name = "cmake" },
     { name = "einops" },
-    { name = "flash-attn" },
     { name = "jsonlines" },
     { name = "ninja" },
     { name = "openai" },
@@ -133,12 +131,7 @@ dependencies = [
     { name = "sentence-transformers" },
     { name = "setuptools" },
     { name = "tiktoken" },
-    { name = "torch" },
-    { name = "torchaudio" },
-    { name = "torchvision" },
     { name = "trl" },
-    { name = "unsloth", extra = ["colab-new"] },
-    { name = "unsloth-zoo" },
     { name = "wandb" },
     { name = "wheel" },
 ]
@@ -167,16 +160,23 @@ docs = [
     { name = "mkdocstrings" },
     { name = "mkdocstrings-python" },
 ]
+gpu = [
+    { name = "bitsandbytes" },
+    { name = "flash-attn" },
+    { name = "torch" },
+    { name = "torchaudio" },
+    { name = "torchvision" },
+    { name = "unsloth", extra = ["colab-new"] },
+    { name = "unsloth-zoo" },
+]
 
 [package.metadata]
 requires-dist = [
     { name = "accelerate", specifier = "==1.10.1" },
     { name = "aiofiles", specifier = ">=25.1.0" },
-    { name = "bitsandbytes", specifier = "==0.48.1" },
     { name = "build", specifier = ">=1.3.0" },
     { name = "cmake", specifier = "==4.1.0" },
     { name = "einops", specifier = ">=0.8.1" },
-    { name = "flash-attn", specifier = "==2.7.3" },
     { name = "jsonlines", specifier = ">=4.0.0" },
     { name = "ninja", specifier = ">=1.13.0" },
     { name = "openai", specifier = ">=2.6.1" },
@@ -189,12 +189,7 @@ requires-dist = [
     { name = "sentence-transformers", specifier = ">=5.1.2" },
     { name = "setuptools", specifier = ">=80.9.0" },
     { name = "tiktoken", specifier = "==0.7.0" },
-    { name = "torch", specifier = "==2.6.0+cu124" },
-    { name = "torchaudio", specifier = "==2.6.0+cu124" },
-    { name = "torchvision", specifier = "==0.21.0+cu124" },
     { name = "trl", specifier = "==0.22.2" },
-    { name = "unsloth", extras = ["colab-new"], git = "https://github.com/unslothai/unsloth.git" },
-    { name = "unsloth-zoo", specifier = ">=2025.10.10" },
     { name = "wandb", specifier = ">=0.22.2" },
     { name = "wheel", specifier = ">=0.45.1" },
 ]
@@ -221,6 +216,15 @@ docs = [
     { name = "mkdocs-material", specifier = ">=9.5.15" },
     { name = "mkdocstrings", specifier = ">=0.24.1" },
     { name = "mkdocstrings-python", specifier = ">=1.10.0" },
+]
+gpu = [
+    { name = "bitsandbytes", specifier = "==0.48.1" },
+    { name = "flash-attn", specifier = "==2.7.3" },
+    { name = "torch", specifier = "==2.6.0+cu124" },
+    { name = "torchaudio", specifier = "==2.6.0+cu124" },
+    { name = "torchvision", specifier = "==0.21.0+cu124" },
+    { name = "unsloth", extras = ["colab-new"], git = "https://github.com/unslothai/unsloth.git" },
+    { name = "unsloth-zoo", specifier = ">=2025.10.10" },
 ]
 
 [[package]]
