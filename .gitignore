@@ -1,0 +1,60 @@
+# Python-generated files
+__pycache__/
+*.py[oc]
+build/
+dist/
+wheels/
+*.egg-info
+
+# Virtual environments
+.venv
+
+# Lint & Test
+.mypy_cache/
+.pytest_cache/
+.ruff_cache/
+.coverage
+
+# Vscode
+.vscode
+
+# macos
+*.DS_Store
+
+# envs folder
+envs/
+
+# mkdocs local site folder
+site/
+
+# local .env file
+.env
+
+# Images, Videos, and Audio
+*.png
+*.jpg
+*.jpeg
+*.gif
+*.mp4
+
+# Logs
+*.log
+
+# Jupyter Notebook checkpoints
+.ipynb_checkpoints
+
+# .env files
+*.env
+
+# zip files
+*.zip
+
+# .json and .jsonl files
+*.json
+*.jsonl
+
+# Text files
+*.txt
+
+# All files inside ./src/data_generation/synthetic_data_generation/images/misc
+src/aixpert/data_generation/synthetic_data_generation/images/misc/*
