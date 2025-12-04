@@ -1,4 +1,0 @@
-repository: /projects/aixpert/users/sindhu/Loss_Test
-
-model:
-  name: gpt-4o-mini   # or gpt-4o

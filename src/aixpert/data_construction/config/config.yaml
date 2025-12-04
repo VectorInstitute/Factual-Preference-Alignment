@@ -1,0 +1,61 @@
+repository: /projects/aixpert/users/sindhu/Loss_Test
+
+model:
+  name: gpt-4o-mini   # or gpt-4o
+  temperature: 0.8
+
+paths:
+  skywork_train_cleaned: "src/aixpert/data_construction/data/skywork_extracted_77k.jsonl"
+  skywork_train_removed: "src/aixpert/data_construction/data/skywork_removed_77k.jsonl"
+
+  skywork_eval_cleaned: "src/aixpert/data_construction/data/skywork_extracted_eval.jsonl"
+  skywork_eval_removed: "src/aixpert/data_construction/data/skywork_eval_removed.jsonl"
+
+  skywork_test_cleaned: "src/aixpert/data_construction/data/skywork_extracted_test.jsonl"
+  skywork_test_removed: "src/aixpert/data_construction/data/skywork_test_removed.jsonl"
+
+  skywork_train_pairs: "src/aixpert/data_construction/data/skywork_preference_pairs_77k.jsonl"
+  skywork_eval_pairs: "src/aixpert/data_construction/data/skywork_preference_pairs_eval.jsonl"
+
+  skywork_train_factual: "src/aixpert/data_construction/data/skywork_binary_factual_train.jsonl"
+  skywork_eval_factual: "src/aixpert/data_construction/data/skywork_binary_factual_eval.jsonl"
+
+  skywork_train_transformed: "src/aixpert/data_construction/data/skywork_first_transformed_train.jsonl"
+  skywork_eval_transformed: "src/aixpert/data_construction/data/skywork_first_transformed_eval.jsonl"
+
+  synthetic_train_out: "src/aixpert/data_construction/data/synthetic_llm_inversion_train_10k.jsonl"
+  synthetic_eval_out:  "src/aixpert/data_construction/data/synthetic_llm_inversion_eval_400.jsonl"
+
+
+  final_train_merged: "src/aixpert/data_construction/data/skywork_final_train.jsonl"
+  final_eval_merged: "src/aixpert/data_construction/data/skywork_final_eval.jsonl"
+
+  final_train_out: "src/aixpert/data_construction/data/train_balanced.jsonl"
+  final_eval_out: "src/aixpert/data_construction/data/eval_final.jsonl"
+
+  train_flipped_out: "src/aixpert/data_construction/data/train_balanced_flipped.jsonl"
+  eval_flipped_out: "src/aixpert/data_construction/data/eval_final_flipped.jsonl"
+
+
+
+  skywork_file: "Skywork/Skywork-Reward-Preference-80K-v0.1"
+
+hyperparams:
+  subset_size: 80000
+  eval_start: 80001
+  eval_end: 81000
+  test_start: 81001
+  test_end: 81500
+  concurrency_limit: 25
+  max_retries: 5
+  corruption_concurrency: 20
+  synthetic_train_samples: 10000
+  synthetic_eval_samples: 400
+
+  balance_targets:
+      "(0,1)": 10000
+      "(1,0)": 10000
+      "(0,0)": 15000
+      "(1,1)": 10000
+
+  eval_additional_clean_samples: 1500
