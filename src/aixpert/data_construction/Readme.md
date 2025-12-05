@@ -19,25 +19,6 @@ Loaded dynamically using:
 ```python
 utils/config_loader.load_config()
 ```
-## Project Structure
-src/aixpert/
-│
-├── config/
-│   └── config.yaml                  # All paths + hyperparameters
-│
-├── data_construction/
-│   ├── stage_1_extraction/          # Train/Eval/Test extraction
-│   ├── stage_2_conversion/          # Preference-pair creation
-│   ├── stage_3_factuality/          # Binary factual scoring (LLM)
-│   ├── stage_4_transformation/      # Convert factual pairs → DPO format
-│   ├── stage_5_syntheticdata/       # Synthetic hallucination generation
-│   ├── stage_6_merging/             # Merge Skywork + synthetic
-│   ├── stage_7_balancing/           # Balanced train/eval dataset construction
-│   ├── stage_8_flipping/            # Flip (1,0) → (0,1) datasets
-│   └── utils/                       # Core shared utils
-│
-└── ...
-
 ## Configuration Summary (`config.yaml`)
 
 ### Model Settings
