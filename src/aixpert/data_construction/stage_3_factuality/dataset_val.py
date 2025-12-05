@@ -22,7 +22,6 @@ async def main() -> None:
     paths = cfg["paths"]
     hp = cfg["hyperparams"]
 
-    # Load API key
     env = Config(RepositoryEnv(f"{repo_path}/.env"))
     api_key = env("OPENAI_API_KEY", default=None)
     if not api_key:

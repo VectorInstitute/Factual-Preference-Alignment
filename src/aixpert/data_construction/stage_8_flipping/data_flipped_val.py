@@ -29,7 +29,7 @@ def main() -> None:
     print("Flipping (h_w=1, h_l=0) samples...")
     flipped = [flip_sample(item) for item in items]
 
-    print(f"💾 Saving flipped dataset → {output_path}")
+    print(f"Saving flipped dataset → {output_path}")
     write_jsonl(output_path, flipped)
 
     print("\n==========================================")
