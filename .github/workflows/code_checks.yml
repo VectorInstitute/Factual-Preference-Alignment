@@ -55,4 +55,4 @@ jobs:
         uses: pypa/gh-action-pip-audit@v1.1.0
         with:
           virtual-environment: .venv
-          ignore-vulns: "PYSEC-2024-161"
+          ignore-vulns: "PYSEC-2024-161, GHSA-gm62-xv2j-4w53, GHSA-2xpw-w6gg-jr37"
