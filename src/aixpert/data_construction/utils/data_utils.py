@@ -75,7 +75,6 @@ def create_preference_pairs(data: List[Dict[str, Any]]) -> List[Dict[str, Any]]:
         chosen = item.get("chosen", "")
         rejected = item.get("rejected", "")
 
-        # Random symmetric assignment
         if random.random() < 0.5:
             response_0 = chosen
             response_1 = rejected

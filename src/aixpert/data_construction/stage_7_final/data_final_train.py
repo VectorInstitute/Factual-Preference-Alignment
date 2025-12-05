@@ -46,7 +46,7 @@ def main() -> None:
         (1, 1): [],
     }
 
-    print("🔍 Bucketing samples…")
+    print("Bucketing samples…")
     for ex in data:
         key = (int(ex["h_w"]), int(ex["h_l"]))
         if key in buckets:
