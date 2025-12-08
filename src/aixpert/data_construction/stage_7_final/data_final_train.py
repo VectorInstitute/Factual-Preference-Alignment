@@ -38,7 +38,6 @@ def main() -> None:
     print(f"Loading → {input_path}")
     data = load_jsonl(input_path)
 
-    # Initialize buckets
     buckets: Dict[Tuple[int, int], List[Dict[str, Any]]] = {
         (0, 1): [],
         (1, 0): [],
@@ -58,7 +57,6 @@ def main() -> None:
 
     final_rows: List[Dict[str, Any]] = []
 
-    # Sampling logic
     for key, req_count in target_counts.items():
         pool = buckets[key]
         available = len(pool)
@@ -66,7 +64,7 @@ def main() -> None:
         print(f"\nBucket {key}: available={available}, required={req_count}")
 
         if available < req_count:
-            print("⚠️ Sampling WITH replacement.")
+            print("Sampling WITH replacement.")
             sampled = random.choices(pool, k=req_count)
         else:
             sampled = random.sample(pool, req_count)
