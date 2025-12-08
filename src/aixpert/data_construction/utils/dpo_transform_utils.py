@@ -44,13 +44,13 @@ def transform_dataset(input_path: Path, output_path: Path) -> None:
     print(f"Loading → {input_path}")
     items = load_jsonl(input_path)
 
-    print(f"⚙️ Transforming {len(items)} items…")
+    print(f"Transforming {len(items)} items…")
     transformed = [process_item(it) for it in tqdm(items)]
 
     print(f"Saving → {output_path}")
     write_jsonl(output_path, transformed)
 
     print("\n=======================================")
-    print("✔ TRANSFORMATION COMPLETE")
+    print("TRANSFORMATION COMPLETE")
     print(f"Total items: {len(items)}")
     print("=======================================\n")
