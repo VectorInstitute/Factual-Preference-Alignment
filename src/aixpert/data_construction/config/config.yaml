@@ -1,5 +1,3 @@
-repository: /projects/aixpert/users/sindhu/Loss_Test
-
 model:
   name: gpt-4o-mini   # or gpt-4o
   temperature: 0.8
@@ -65,3 +63,5 @@ hyperparams:
 
 dataset_processing:
   keep_keys: ["prompt", "chosen", "rejected", "h_w", "h_l", "flipped"]
+
+openai_api_key: "${OPENAI_API_KEY}"
