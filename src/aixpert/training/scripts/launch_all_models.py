@@ -1,12 +1,12 @@
-"""Launcher script that runs Original DPO training for all configured models."""
+"""Launch Original DPO training for all configured models."""
 
 import subprocess
 
 from utils.config_loader import load_config
 
 
-def main():
-    """Iterates over all models and launches the baseline DPO training script."""
+def main() -> None:
+    """Launch baseline DPO training for each configured model."""
     cfg = load_config()
     models = cfg["models"]
 

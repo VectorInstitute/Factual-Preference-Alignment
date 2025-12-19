@@ -1,18 +1,21 @@
 """
-Utility functions for loading datasets, preparing Unsloth models, and building
-DPO/Factual-DPO++ training configurations.
+Utility functions for preparing datasets and models for DPO and Factual-DPO++.
+
+Includes helpers for JSONL loading, Unsloth model setup, and config construction.
 """
 
 import json
+from typing import Any, Dict, Tuple
 
 import torch
 from datasets import Dataset
+from transformers import PreTrainedTokenizerBase
 from trl import DPOConfig
 from unsloth import FastLanguageModel
 
 
 def load_and_clean_jsonl(path: str) -> Dataset:
-    """Loads JSONL factual dataset and converts it into a HF Dataset with required fields."""
+    """Load a JSONL factual dataset and convert it into a HF Dataset."""
     rows = []
     with open(path, "r") as f:
         for line in f:
@@ -29,8 +32,8 @@ def load_and_clean_jsonl(path: str) -> Dataset:
     return Dataset.from_list(rows)
 
 
-def load_unsloth_model(model_name: str, max_seq_length: int):
-    """Loads a 4-bit Unsloth QLoRA model + tokenizer with FlashAttention2 and LoRA applied."""
+def load_unsloth_model(model_name: str, max_seq_length: int) -> Tuple[Any, Any]:
+    """Load a 4-bit Unsloth QLoRA model, tokenizer and LoRA adapters applied."""
     model, tokenizer = FastLanguageModel.from_pretrained(
         model_name=model_name,
         max_seq_length=max_seq_length,
@@ -46,7 +49,6 @@ def load_unsloth_model(model_name: str, max_seq_length: int):
     tokenizer.padding_side = "right"
     tokenizer.truncation_side = "left"
 
-    # LoRA configuration
     model = FastLanguageModel.get_peft_model(
         model,
         r=32,
@@ -66,14 +68,19 @@ def load_unsloth_model(model_name: str, max_seq_length: int):
     return model, tokenizer
 
 
-def build_dpo_config(hp, tokenizer, delta: float, output_dir: str):
-    """Builds TRL DPOConfig with Safe-DPO factual margin Δ added."""
+def build_dpo_config(
+    hp: Dict[str, Any],
+    tokenizer: PreTrainedTokenizerBase,
+    delta: float,
+    output_dir: str,
+) -> DPOConfig:
+    """Build a TRL DPOConfig object with the Safe-DPO factual margin Δ."""
     cfg = DPOConfig(
         output_dir=output_dir,
         beta=hp["beta"],
         num_train_epochs=hp["num_train_epochs"],
         per_device_train_batch_size=hp["per_device_train_batch_size"],
-        per_device_eval_batch_size=hp["per_device_eval_batch_size"],
+        per_device_eval_batch_size=hp["per_device_train_batch_size"],
         gradient_accumulation_steps=hp["gradient_accumulation_steps"],
         learning_rate=hp["learning_rate"],
         warmup_ratio=hp["warmup_ratio"],
@@ -94,5 +101,4 @@ def build_dpo_config(hp, tokenizer, delta: float, output_dir: str):
     )
 
     cfg.delta = delta
-
     return cfg

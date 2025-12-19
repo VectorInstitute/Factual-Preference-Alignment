@@ -1,5 +1,6 @@
-"""Runs Modified Factual-DPO++ training for a single model and a single Δ value."""
+"""Run Modified Factual-DPO++ training for a single model and a single Δ value."""
 
+import argparse
 import os
 
 import wandb
@@ -17,8 +18,8 @@ from utils.modified_trainer_utils import (
 PatchDPOTrainer()
 
 
-def train_one_model(model_id: str, short: str, delta: float):
-    """Loads config, datasets, model, and runs Factual-DPO++ training for one (model, Δ) pair."""
+def train_one_model(model_id: str, short: str, delta: float) -> None:
+    """Load config, datasets, model, then run training for a single (model, Δ) pair."""
     cfg = load_config()
     mod = cfg["modified_dpo"]
 
@@ -64,7 +65,7 @@ def train_one_model(model_id: str, short: str, delta: float):
         processing_class=tokenizer,
     )
 
-    print(f"\n Starting FactualDPO++ Training: {model_id} (Δ={delta})")
+    print(f"\nStarting FactualDPO++ Training: {model_id} (Δ={delta})")
     trainer.train()
 
     trainer.save_model(output_dir)
@@ -74,19 +75,19 @@ def train_one_model(model_id: str, short: str, delta: float):
     wandb.finish()
 
 
-def main():
-    """Parses CLI arguments and launches training for a single model–Δ combination."""
-    import argparse
-
+def main() -> None:
+    """Parse CLI arguments and launch training for a single model–Δ combination."""
     parser = argparse.ArgumentParser()
-
     parser.add_argument("--model_id", type=str, required=True)
     parser.add_argument("--short", type=str, required=True)
     parser.add_argument("--delta", type=float, required=True)
-
     args = parser.parse_args()
 
-    train_one_model(model_id=args.model_id, short=args.short, delta=args.delta)
+    train_one_model(
+        model_id=args.model_id,
+        short=args.short,
+        delta=args.delta,
+    )
 
 
 if __name__ == "__main__":
