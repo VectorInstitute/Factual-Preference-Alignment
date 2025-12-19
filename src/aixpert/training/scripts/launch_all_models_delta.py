@@ -1,22 +1,22 @@
-"""Launcher script that runs Factual-DPO++ training for all models across all Δ values."""
+"""Launch Factual-DPO++ training for all models across all delta values."""
 
 import subprocess
 
 from utils.config_loader import load_config
 
 
-def main():
-    """Iterates over all models and deltas and spawns individual training jobs."""
+def main() -> None:
+    """Launch training jobs for every model–delta combination."""
     cfg = load_config()
     models = cfg["models"]
     deltas = cfg["modified_dpo"]["deltas"]
 
-    print("Launching Modified FactualDPO Training for all models × all deltas...")
+    print("Launching Modified FactualDPO training for all models × all deltas...")
 
     for delta in deltas:
         for m in models:
             cmd = (
-                f"python -m training.run_modified_training "
+                "python -m training.run_modified_training "
                 f'--model_id "{m["id"]}" '
                 f'--short "{m["short"]}" '
                 f"--delta {delta}"

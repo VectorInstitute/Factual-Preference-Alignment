@@ -1,4 +1,4 @@
-"""Runs baseline Original-DPO training for a single model specified by CLI arguments."""
+"""Run baseline Original-DPO training."""
 
 from utils.config_loader import load_config
 from utils.trainer_utils import (
@@ -9,8 +9,8 @@ from utils.trainer_utils import (
 )
 
 
-def train_single_model(model_name: str):
-    """Loads config, prepares dataset/model, and runs Original-DPO training for one model."""
+def train_single_model(model_name: str) -> None:
+    """Load config, dataset, model, and run Original-DPO training for one model."""
     cfg = load_config()
     hp = cfg["original_dpo"]["hyperparams"]
     paths = cfg["original_dpo"]["paths"]
@@ -23,7 +23,9 @@ def train_single_model(model_name: str):
     eval_data = load_dataset_for_dpo(paths.eval)
 
     model, tokenizer = load_model_and_tokenizer(
-        model_name, hp.max_seq_length, hp.load_in_4bit
+        model_name,
+        hp.max_seq_length,
+        hp.load_in_4bit,
     )
 
     model = apply_lora(model, hp)
