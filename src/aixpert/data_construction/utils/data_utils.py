@@ -11,6 +11,8 @@ import random
 from pathlib import Path
 from typing import Any, Dict, List, Tuple
 
+from utils.config_loader import load_config
+
 
 def extract_prompt(dialog: List[Dict[str, Any]]) -> str:
     """Extract the first user message."""
@@ -121,3 +123,28 @@ def flip_sample(item: Dict[str, Any]) -> Dict[str, Any]:
         item["h_w"], item["h_l"] = 0, 1
         item["chosen"], item["rejected"] = item["rejected"], item["chosen"]
     return item
+
+
+def process_jsonl_with_flip(input_path: str, output_path: str):
+    """Remove keys"""
+    cfg = load_config()
+    keep_keys = cfg.dataset_processing.keep_keys
+
+    with open(input_path, "r") as f_in, open(output_path, "w") as f_out:
+        for line in f_in:
+            if not line.strip():
+                continue
+
+            data = json.loads(line)
+
+            if data.get("source") == "synthetic_inversion":
+                data["flipped"] = True
+
+            cleaned = {k: data.get(k) for k in keep_keys}
+
+            if cleaned.get("flipped") is None:
+                cleaned["flipped"] = False
+
+            f_out.write(json.dumps(cleaned) + "\n")
+
+    print(f"[✓] Saved processed file to: {output_path}")
