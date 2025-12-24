@@ -36,10 +36,10 @@ The **Original DPO loss** is:
 \right]
 ```
 where:
-- ( \pi_\theta \) is the trainable policy
-- ```math\(\pi_{\text{ref}}\)``` is the frozen reference policy
-- ```math\(\beta\)``` is a temperature parameter
-- ```math\(\sigma(\cdot)\)``` is the sigmoid function
+- πθ: trainable policy
+- π_ref: frozen reference policy
+- β: temperature parameter
+- σ(·): sigmoid function
 
 ---
 
@@ -74,9 +74,9 @@ The **Factual-DPO loss** is:
 ```
 
 where:
-- ```math\(\lambda\)``` controls the strength of the factuality penalty
-- Larger ```math\(\lambda\)``` enforces stronger hallucination suppression
-- When ```math\(\Delta h = 0\)```, the loss reduces to **Original DPO**
+- λ controls the strength of the factuality penalty
+- Larger λ enforces stronger hallucination suppression
+- When Δh = 0, the loss reduces to **Original DPO****
 
 ---
 
@@ -84,8 +84,8 @@ where:
 
 | Method | Optimization Target |
 |------|---------------------|
-| Original DPO |```math \( \log \sigma(\beta \cdot m) \)``` |
-| Factual-DPO | ```math\( \log \sigma(\beta \cdot (m - \lambda \Delta h)) \) ```|
+| Original DPO |log σ(β · m) |
+| Factual-DPO | log σ(β · (m − λΔh))|
 
 
 
