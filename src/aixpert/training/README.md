@@ -16,7 +16,7 @@ This section summarizes the **training objectives** used in this repository.
 
 ### Original DPO Objective (Baseline)
 
-Given a preference tuple \((x, y_w, y_l)\) and a reference policy \(\pi_{\text{ref}}\), the **Direct Preference Optimization (DPO)** margin is defined as:
+Given a preference tuple \((x, y_w, y_l)\) and a reference policy π_ref, the **Direct Preference Optimization (DPO)** margin is defined as:
 
 ```math
 m(x, y_w, y_l) =
@@ -46,7 +46,7 @@ where:
 ### Factual-DPO
 
 Each preference tuple additionally includes factuality indicators
-```math\((h_w, h_l) \in \{0,1\}\)```, where \(1\) denotes a factual violation.
+(h_w, h_l) in \{0,1\}, where \(1\) denotes a factual violation.
 
 After label transformation, define:
 
