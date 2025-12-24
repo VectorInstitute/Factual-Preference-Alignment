@@ -18,6 +18,7 @@ This section summarizes the **training objectives** used in this repository.
 
 Given a preference tuple \((x, y_w, y_l)\) and a reference policy \(\pi_{\text{ref}}\), the **Direct Preference Optimization (DPO)** margin is defined as:
 
+```math
 \[
 m(x, y_w, y_l) =
 \log \frac{\pi_\theta(y_w \mid x)}{\pi_\theta(y_l \mid x)}
@@ -27,6 +28,7 @@ m(x, y_w, y_l) =
 
 The **Original DPO loss** is:
 
+```math
 \[
 \mathcal{L}_{\text{DPO}}(\theta)
 =
@@ -51,9 +53,9 @@ Each preference tuple additionally includes factuality indicators
 
 After label transformation, define:
 
-\[
+```math
 \Delta h = h_l - h_w \in \{0, 1\}
-\]
+
 
 The **factuality-aware margin** is:
 
