@@ -5,7 +5,7 @@ Vector Institute — AI Engineering Template Compatible
 This directory contains the full training pipeline for:
 
 1. **Original Direct Preference Optimization (DPO)** — Baseline alignment
-2. **Factual-DPO** — A SafeDPO-style variant with a factual margin Δ
+2. **Factual-DPO** — A FactualDPO-style variant with a factual margin Δ
 3. **Multi-model training orchestration** driven entirely by `config.yaml`
 
 ## 📐 DPO Objectives
