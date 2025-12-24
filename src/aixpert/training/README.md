@@ -19,67 +19,64 @@ This section summarizes the **training objectives** used in this repository.
 Given a preference tuple \((x, y_w, y_l)\) and a reference policy \(\pi_{\text{ref}}\), the **Direct Preference Optimization (DPO)** margin is defined as:
 
 ```math
-\[
 m(x, y_w, y_l) =
 \log \frac{\pi_\theta(y_w \mid x)}{\pi_\theta(y_l \mid x)}
 -
 \log \frac{\pi_{\text{ref}}(y_w \mid x)}{\pi_{\text{ref}}(y_l \mid x)}
-\]
 ```
 
 The **Original DPO loss** is:
 
 ```math
-\[
 \mathcal{L}_{\text{DPO}}(\theta)
 =
 -\mathbb{E}_{(x,y_w,y_l)}
 \left[
 \log \sigma\left(\beta \cdot m(x,y_w,y_l)\right)
 \right]
-\]
 ```
 where:
-- \(\pi_\theta\) is the trainable policy
-- \(\pi_{\text{ref}}\) is the frozen reference policy
-- \(\beta\) is a temperature parameter
-- \(\sigma(\cdot)\) is the sigmoid function
+- ```math\(\pi_\theta\)``` is the trainable policy
+- ```math\(\pi_{\text{ref}}\)``` is the frozen reference policy
+- ```math\(\beta\)``` is a temperature parameter
+- ```math\(\sigma(\cdot)\)``` is the sigmoid function
 
 ---
 
 ### Factual-DPO
 
 Each preference tuple additionally includes factuality indicators
-\((h_w, h_l) \in \{0,1\}\), where \(1\) denotes a factual violation.
+```math\((h_w, h_l) \in \{0,1\}\)```, where \(1\) denotes a factual violation.
 
 After label transformation, define:
 
 ```math
 \Delta h = h_l - h_w \in \{0, 1\}
+```
 
 
 The **factuality-aware margin** is:
 
-\[
+```math
 m_{\text{fact}} =
 m - \lambda \cdot \Delta h
-\]
+```
 
 The **Factual-DPO loss** is:
 
-\[
+```math
 \mathcal{L}_{\text{FactualDPO}}(\theta)
 =
 -\mathbb{E}_{(x,y_w,y_l,h_w,h_l)}
 \left[
 \log \sigma\left(\beta \cdot (m - \lambda \cdot \Delta h)\right)
 \right]
-\]
+```
 
 where:
-- \(\lambda\) controls the strength of the factuality penalty
-- Larger \(\lambda\) enforces stronger hallucination suppression
-- When \(\Delta h = 0\), the loss reduces to **Original DPO**
+- ```math\(\lambda\)``` controls the strength of the factuality penalty
+- Larger ```math\(\lambda\)``` enforces stronger hallucination suppression
+- When ```math\(\Delta h = 0\)```, the loss reduces to **Original DPO**
 
 ---
 
@@ -87,8 +84,8 @@ where:
 
 | Method | Optimization Target |
 |------|---------------------|
-| Original DPO | \( \log \sigma(\beta \cdot m) \) |
-| Factual-DPO | \( \log \sigma(\beta \cdot (m - \lambda \Delta h)) \) |
+| Original DPO |```math \( \log \sigma(\beta \cdot m) \)``` |
+| Factual-DPO | ```math\( \log \sigma(\beta \cdot (m - \lambda \Delta h)) \) ```|
 
 
 
