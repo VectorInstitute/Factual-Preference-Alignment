@@ -1,4 +1,4 @@
-# AIXpert Preference Alignment — Training Pipeline
+# Factual Preference Alignment — Training Pipeline
 Original-DPO & Factual-DPO Fine-Tuning
 Vector Institute — AI Engineering Template Compatible
 
