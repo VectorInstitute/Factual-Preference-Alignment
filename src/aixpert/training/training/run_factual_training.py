@@ -1,14 +1,14 @@
-"""Run Modified Factual-DPO++ training for a single model and a single Δ value."""
+"""Run Factual-DPO training for a single model and a single Δ value."""
 
 import argparse
 import os
 
 import wandb
-from training.modifieddpo_trainer import DataCollatorForPreference
-from training.modifieddpo_trainer import FactualDPOTrainer as DPOTrainer
+from training.factualdpo_trainer import DataCollatorForPreference
+from training.factualdpo_trainer import FactualDPOTrainer as DPOTrainer
 from unsloth import PatchDPOTrainer
 from utils.config_loader import load_config
-from utils.modified_trainer_utils import (
+from utils.factual_trainer_utils import (
     build_dpo_config,
     load_and_clean_jsonl,
     load_unsloth_model,
@@ -21,7 +21,7 @@ PatchDPOTrainer()
 def train_one_model(model_id: str, short: str, delta: float) -> None:
     """Load config, datasets, model, then run training for a single (model, Δ) pair."""
     cfg = load_config()
-    mod = cfg["modified_dpo"]
+    mod = cfg["factual_dpo"]
 
     train_file = mod["paths"]["train_file"]
     eval_file = mod["paths"]["eval_file"]
@@ -65,7 +65,7 @@ def train_one_model(model_id: str, short: str, delta: float) -> None:
         processing_class=tokenizer,
     )
 
-    print(f"\nStarting FactualDPO++ Training: {model_id} (Δ={delta})")
+    print(f"\nStarting FactualDPO Training: {model_id} (Δ={delta})")
     trainer.train()
 
     trainer.save_model(output_dir)

@@ -1,12 +1,93 @@
 # AIXpert Preference Alignment — Training Pipeline
-Original-DPO & Factual-DPO++ Fine-Tuning
+Original-DPO & Factual-DPO Fine-Tuning
 Vector Institute — AI Engineering Template Compatible
 
 This directory contains the full training pipeline for:
 
 1. **Original Direct Preference Optimization (DPO)** — Baseline alignment
-2. **Modified Factual-DPO++** — A SafeDPO-style variant with a factual margin Δ
+2. **Factual-DPO** — A SafeDPO-style variant with a factual margin Δ
 3. **Multi-model training orchestration** driven entirely by `config.yaml`
+
+## 📐 DPO Objectives
+
+This section summarizes the **training objectives** used in this repository.
+
+---
+
+### Original DPO Objective (Baseline)
+
+Given a preference tuple \((x, y_w, y_l)\) and a reference policy \(\pi_{\text{ref}}\), the **Direct Preference Optimization (DPO)** margin is defined as:
+
+\[
+m(x, y_w, y_l) =
+\log \frac{\pi_\theta(y_w \mid x)}{\pi_\theta(y_l \mid x)}
+-
+\log \frac{\pi_{\text{ref}}(y_w \mid x)}{\pi_{\text{ref}}(y_l \mid x)}
+\]
+
+The **Original DPO loss** is:
+
+\[
+\mathcal{L}_{\text{DPO}}(\theta)
+=
+-\mathbb{E}_{(x,y_w,y_l)}
+\left[
+\log \sigma\left(\beta \cdot m(x,y_w,y_l)\right)
+\right]
+\]
+
+where:
+- \(\pi_\theta\) is the trainable policy
+- \(\pi_{\text{ref}}\) is the frozen reference policy
+- \(\beta\) is a temperature parameter
+- \(\sigma(\cdot)\) is the sigmoid function
+
+---
+
+### Factual-DPO
+
+Each preference tuple additionally includes factuality indicators
+\((h_w, h_l) \in \{0,1\}\), where \(1\) denotes a factual violation.
+
+After label transformation, define:
+
+\[
+\Delta h = h_l - h_w \in \{0, 1\}
+\]
+
+The **factuality-aware margin** is:
+
+\[
+m_{\text{fact}} =
+m - \lambda \cdot \Delta h
+\]
+
+The **Factual-DPO loss** is:
+
+\[
+\mathcal{L}_{\text{FactualDPO}}(\theta)
+=
+-\mathbb{E}_{(x,y_w,y_l,h_w,h_l)}
+\left[
+\log \sigma\left(\beta \cdot (m - \lambda \cdot \Delta h)\right)
+\right]
+\]
+
+where:
+- \(\lambda\) controls the strength of the factuality penalty
+- Larger \(\lambda\) enforces stronger hallucination suppression
+- When \(\Delta h = 0\), the loss reduces to **Original DPO**
+
+---
+
+### Key Difference
+
+| Method | Optimization Target |
+|------|---------------------|
+| Original DPO | \( \log \sigma(\beta \cdot m) \) |
+| Factual-DPO | \( \log \sigma(\beta \cdot (m - \lambda \Delta h)) \) |
+
+
 
 All training is configured from:
 
@@ -49,7 +130,7 @@ models:
     short: "llama3.2-1b"
 ```
 
-This registry enables **automatic multi-model training** for both Original-DPO and Factual-DPO++.
+This registry enables **automatic multi-model training** for both Original-DPO and Factual-DPO.
 
 ---
 
@@ -106,12 +187,12 @@ src/aixpert/training/data/original/Models/<short>_OriginalDPO/
 
 ---
 
-## 3️⃣ Modified Factual-DPO++ Configuration
+## 3️⃣ Factual-DPO Configuration
 
 Defined under:
 
 ```yaml
-modified_dpo:
+factual_dpo:
 ```
 
 This block extends Original-DPO with factuality-aware training using SafeDPO-style Δ-margin.
@@ -130,9 +211,9 @@ Each Δ produces a **separate fine-tuned model**.
 
 ```yaml
 paths:
-  train_file: "src/aixpert/training/data/modified/train_final_flipped.jsonl"
-  eval_file:  "src/aixpert/training/data/modified/eval_final_flipped.jsonl"
-  output_root: "src/aixpert/training/data/modified/Models"
+  train_file: "src/aixpert/training/data/factual/train_final_flipped.jsonl"
+  eval_file:  "src/aixpert/training/data/factual/eval_final_flipped.jsonl"
+  output_root: "src/aixpert/training/data/factual/Models"
 ```
 
 These datasets include:
@@ -200,18 +281,18 @@ src/aixpert/training/data/original/Models/<short>_OriginalDPO/
 
 ---
 
-### 2️⃣ Modified Factual-DPO++ Training
+### 2️⃣ Factual-DPO Training
 
 Train a model with Δ=10:
 
 ```bash
-python -m aixpert.training.run_modified_training     --model_id "google/gemma-2-9b-it"     --short "gemma2-9b"     --delta 10
+python -m aixpert.training.run_factual_training     --model_id "google/gemma-2-9b-it"     --short "gemma2-9b"     --delta 10
 ```
 
 Saves to:
 
 ```
-src/aixpert/training/data/modified/Models/<short>_delta10/
+src/aixpert/training/data/factual/Models/<short>_delta10/
 ```
 
 ---
@@ -222,7 +303,7 @@ The following files are **copied directly from TRL GitHub** and intentionally ex
 
 ```
 training/trl/
-training/modifieddpo_trainer.py
+training/factualdpo_trainer.py
 ```
 
 They contain internal SafeDPO logic required for Δ-margin training.
@@ -234,7 +315,30 @@ They contain internal SafeDPO logic required for Δ-margin training.
 This training pipeline supports:
 
 - Multi-model Original-DPO training
-- Factual-DPO++ training with configurable Δ
+- Factual-DPO training with configurable Δ
 - Config-driven reproducibility
 - Full WandB integration
 - Unsloth QLoRA optimization
+
+## 🔧 Training Framework
+
+This project is built on top of **Hugging Face TRL (Transformer Reinforcement Learning)**, which provides the reference implementation for **Direct Preference Optimization (DPO)** and related preference-based fine-tuning methods.
+
+We reuse and extend TRL’s DPO training infrastructure to implement **Factual-DPO**, while preserving full compatibility with TRL’s training abstractions.
+
+🔗 **TRL Repository:**  
+https://github.com/huggingface/trl
+
+---
+
+## 📚 Reference
+
+If you use this codebase or build upon it, please also cite the TRL library:
+
+```bibtex
+@software{trl,
+  author = {Hugging Face},
+  title = {TRL: Transformer Reinforcement Learning},
+  url = {https://github.com/huggingface/trl},
+  year = {2023}
+}

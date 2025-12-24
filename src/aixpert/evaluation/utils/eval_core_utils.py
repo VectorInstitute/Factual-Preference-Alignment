@@ -4,7 +4,7 @@ Core evaluation utilities for factuality scoring.
 This module provides:
 - Batched text generation for two fine-tuned models.
 - Asynchronous factual judging using GPT-4o-mini (or another configured judge).
-- A high-level function `evaluate_pair()` for comparing Original-DPO vs Modified-DPO++.
+- A high-level function `evaluate_pair()` for comparing Original-DPO vs Factual-DPO.
 """
 
 import asyncio
@@ -124,7 +124,7 @@ async def evaluate_pair(
     judge_model: str,
 ) -> dict:
     """
-    Evaluate Original-DPO (model A) vs Modified-DPO++ (model B) factuality.
+    Evaluate Original-DPO (model A) vs Factual-DPO (model B) factuality.
 
     Returns
     -------
