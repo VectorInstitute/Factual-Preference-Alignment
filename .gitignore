@@ -31,7 +31,6 @@ site/
 .env
 
 # Images, Videos, and Audio
-*.png
 *.jpg
 *.jpeg
 *.gif
