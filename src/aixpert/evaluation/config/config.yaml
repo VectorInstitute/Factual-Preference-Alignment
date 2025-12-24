@@ -6,7 +6,7 @@ eval:
 
 paths:
   original_root: "src/aixpert/training/data/original/Models"
-  modified_root: "src/aixpert/training/data/modified/Models"
+  factual_root: "src/aixpert/training/data/factual/Models"
 
 models:
   - short: "gemma2-9b"
@@ -19,7 +19,7 @@ models:
 
 deltas: [0, 2, 4, 6, 8, 10, 20, 30, 50, 100]
 
-model:
+llm-as-judge:
   name: gpt-4o-mini   # or gpt-4o
   temperature: 0.8
 

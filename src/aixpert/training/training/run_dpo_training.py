@@ -12,20 +12,21 @@ from utils.trainer_utils import (
 def train_single_model(model_name: str) -> None:
     """Load config, dataset, model, and run Original-DPO training for one model."""
     cfg = load_config()
-    hp = cfg["original_dpo"]["hyperparams"]
-    paths = cfg["original_dpo"]["paths"]
+    mod = cfg["original_dpo"]
+    hp = mod["hyperparams"]
+    paths = mod["paths"]
 
     print(f"Training model: {model_name}")
 
-    output_dir = f"{paths.output_root}/{model_name.replace('/', '_')}_OriginalDPO"
+    output_dir = f"{paths['output_root']}/{model_name.replace('/', '_')}_OriginalDPO"
 
-    train_data = load_dataset_for_dpo(paths.train)
-    eval_data = load_dataset_for_dpo(paths.eval)
+    train_data = load_dataset_for_dpo(paths["train"])
+    eval_data = load_dataset_for_dpo(paths["eval"])
 
     model, tokenizer = load_model_and_tokenizer(
         model_name,
-        hp.max_seq_length,
-        hp.load_in_4bit,
+        hp["max_seq_length"],
+        hp["load_in_4bit"],
     )
 
     model = apply_lora(model, hp)

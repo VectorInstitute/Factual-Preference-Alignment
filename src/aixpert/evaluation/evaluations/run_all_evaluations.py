@@ -2,7 +2,7 @@
 Run factuality evaluation for all models and all delta values.
 
 This module loads the global evaluation config, iterates over every
-(model, Δ) pair, evaluates Original-DPO vs. Modified-DPO++, and stores
+(model, Δ) pair, evaluates Original-DPO vs. Factual-DPO, and stores
 results in a JSON file.
 """
 
@@ -28,13 +28,13 @@ async def main() -> None:
     concurrency = cfg["eval"]["judge_concurrency"]
 
     original_root = cfg["paths"]["original_root"]
-    modified_root = cfg["paths"]["modified_root"]
+    factual_root = cfg["paths"]["factual_root"]
 
     models = cfg["models"]
     deltas = cfg["deltas"]
 
     api_key = cfg["openai_api_key"]
-    judge_model = cfg["model"]["name"]
+    judge_model = cfg["llm-as-judge"]["name"]
 
     results = {}
 
@@ -43,7 +43,7 @@ async def main() -> None:
         orig_model_path = f"{original_root}/{short}_OriginalDPO"
 
         for d in deltas:
-            mod_model_path = f"{modified_root}/{short}_delta{d}"
+            mod_model_path = f"{factual_root}/{short}_delta{d}"
 
             print(f"\n=== Evaluating {short}: Original vs Δ={d} ===")
 

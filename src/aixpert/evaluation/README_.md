@@ -4,7 +4,7 @@ GPT-4o-mini Judge · Factuality Scoring · Multi-Model Benchmarking
 This directory implements the **automated evaluation pipeline** used to benchmark:
 
 - Original-DPO models
-- Factual-DPO++ models (across Δ = 0, 2, 4, 6, 8, 10, 20, 30, 50, 100)
+- Factual-DPO models (across Δ = 0, 2, 4, 6, 8, 10, 20, 30, 50, 100)
 
 Evaluation is performed using **GPT-4o-mini** as an LLM-as-a-judge.
 

@@ -36,13 +36,13 @@ original_dpo:
     logging_steps: 20
     seed: 3407
 
-modified_dpo:
+factual_dpo:
   deltas: [0, 2, 4, 6, 8, 10, 20, 30, 50, 100]
 
   paths:
-    train_file: "src/aixpert/training/data/modified/train_final_flipped.jsonl"
-    eval_file:  "src/aixpert/training/data/modified/eval_final_flipped.jsonl"
-    output_root: "src/aixpert/training/data/modified/Models"
+    train_file: "src/aixpert/training/data/factual/train_final_flipped.jsonl"
+    eval_file:  "src/aixpert/training/data/factual/eval_final_flipped.jsonl"
+    output_root: "src/aixpert/training/data/factual/Models"
 
   hyperparams:
     max_seq_length: 2048
@@ -59,6 +59,7 @@ modified_dpo:
     beta: 0.1
     save_steps: 100
     logging_steps: 20
+    seed: 3407
 
   wandb:
     project: "aixpert"

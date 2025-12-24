@@ -1,5 +1,5 @@
 """
-Utility functions for preparing datasets and models for DPO and Factual-DPO++.
+Utility functions for preparing datasets and models for DPO and Factual-DPO.
 
 Includes helpers for JSONL loading, Unsloth model setup, and config construction.
 """
