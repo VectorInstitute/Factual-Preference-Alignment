@@ -247,7 +247,7 @@
                 <span class="author-block">
                   <a href="https://scholar.google.com/citations?user=LNWuVNkAAAAJ&hl=en&oi=ao" target="_blank">Azib Farooq</a><sup>2</sup>,</span>
                   <span class="author-block">
-                    <a href="THIRD AUTHOR PERSONAL LINK" target="_blank">Ahmed</a><sup>1</sup>,
+                    <a href="THIRD AUTHOR PERSONAL LINK" target="_blank">Ahmed Radwan</a><sup>1</sup>,
                   </span>
                   <span class="author-block">
                     <a href="https://github.com/shainarazavi" target="_blank">Shaina Raza</a><sup>1</sup>
@@ -352,6 +352,94 @@
   </div>
 </section>
 <!-- End paper abstract -->
+
+
+
+<section class="section">
+  <div class="container is-max-desktop">
+    
+    <h2 class="title is-4 has-text-centered">
+      Table 1: Comparison of factuality-alignment properties across related DPO-based methods.
+    </h2>
+
+    <div class="table-container">
+      <table class="table is-fullwidth is-hoverable" style="font-family: 'Latin Modern Roman', serif; font-size: 0.75em;">
+        
+        <thead>
+          <tr>
+            <th class="has-text-left" style="white-space: nowrap; vertical-align: middle; padding: 4px;">Method</th>
+            <th class="has-text-centered" style="white-space: nowrap; vertical-align: middle; padding: 4px;">Single-stage</th>
+            <th class="has-text-centered" style="white-space: nowrap; vertical-align: middle; padding: 4px;">Label Correction</th>
+            <th class="has-text-centered" style="white-space: nowrap; vertical-align: middle; padding: 4px;">Factuality Margin</th>
+            <th class="has-text-centered" style="white-space: nowrap; vertical-align: middle; padding: 4px;">Hallucinations Penalty</th>
+            <th class="has-text-centered" style="white-space: nowrap; vertical-align: middle; padding: 4px;">External Free</th>
+            <th class="has-text-centered" style="white-space: nowrap; vertical-align: middle; padding: 4px;">Response-level</th>
+            <th class="has-text-centered" style="white-space: nowrap; vertical-align: middle; padding: 4px;">Compute Efficient</th>
+          </tr>
+        </thead>
+
+        <tbody>
+          
+          <tr>
+            <td class="has-text-left" style="white-space: nowrap; padding: 4px;">FActS-DPO</td>
+            <td class="has-text-centered" style="padding: 4px;"><span style="color: #008000;">&#10003;</span></td>
+            <td class="has-text-centered" style="padding: 4px;"><span style="color: red;">&#10007;</span></td>
+            <td class="has-text-centered" style="padding: 4px;"><span style="color: red;">&#10007;</span></td>
+            <td class="has-text-centered" style="padding: 4px;"><span style="color: #008000;">&#10003;</span></td>
+            <td class="has-text-centered" style="padding: 4px;"><span style="color: red;">&#10007;</span></td>
+            <td class="has-text-centered" style="padding: 4px;"><span style="color: #008000;">&#10003;</span></td>
+            <td class="has-text-centered" style="padding: 4px;"><span style="color: #008000;">&#10003;</span></td>
+          </tr>
+
+          <tr>
+            <td class="has-text-left" style="white-space: nowrap; padding: 4px;">MASK-DPO</td>
+            <td class="has-text-centered" style="padding: 4px;"><span style="color: #008000;">&#10003;</span></td>
+            <td class="has-text-centered" style="padding: 4px;"><span style="color: #008000;">&#10003;</span></td>
+            <td class="has-text-centered" style="padding: 4px;"><span style="color: red;">&#10007;</span></td>
+            <td class="has-text-centered" style="padding: 4px;"><span style="color: #008000;">&#10003;</span></td>
+            <td class="has-text-centered" style="padding: 4px;"><span style="color: red;">&#10007;</span></td>
+            <td class="has-text-centered" style="padding: 4px;"><span style="color: red;">&#10007;</span></td>
+            <td class="has-text-centered" style="padding: 4px;"><span style="color: red;">&#10007;</span></td>
+          </tr>
+
+          <tr>
+            <td class="has-text-left" style="white-space: nowrap; padding: 4px;">Context-DPO</td>
+            <td class="has-text-centered" style="padding: 4px;"><span style="color: #008000;">&#10003;</span></td>
+            <td class="has-text-centered" style="padding: 4px;"><span style="color: red;">&#10007;</span></td>
+            <td class="has-text-centered" style="padding: 4px;"><span style="color: red;">&#10007;</span></td>
+            <td class="has-text-centered" style="padding: 4px;"><span style="color: red;">&#10007;</span></td>
+            <td class="has-text-centered" style="padding: 4px;"><span style="color: #008000;">&#10003;</span></td>
+            <td class="has-text-centered" style="padding: 4px;"><span style="color: red;">&#10007;</span></td>
+            <td class="has-text-centered" style="padding: 4px;"><span style="color: #008000;">&#10003;</span></td>
+          </tr>
+
+          <tr>
+            <td class="has-text-left" style="white-space: nowrap; padding: 4px;">Self-Generated DPO</td>
+            <td class="has-text-centered" style="padding: 4px;"><span style="color: #008000;">&#10003;</span></td>
+            <td class="has-text-centered" style="padding: 4px;"><span style="color: #008000;">&#10003;</span></td>
+            <td class="has-text-centered" style="padding: 4px;"><span style="color: red;">&#10007;</span></td>
+            <td class="has-text-centered" style="padding: 4px;"><span style="color: #008000;">&#10003;</span></td>
+            <td class="has-text-centered" style="padding: 4px;"><span style="color: #008000;">&#10003;</span></td>
+            <td class="has-text-centered" style="padding: 4px;"><span style="color: #008000;">&#10003;</span></td>
+            <td class="has-text-centered" style="padding: 4px;"><span style="color: #008000;">&#10003;</span></td>
+          </tr>
+
+          <tr>
+            <td class="has-text-left" style="white-space: nowrap; padding: 4px;"><strong>Ours</strong></td>
+            <td class="has-text-centered" style="padding: 4px;"><span style="color: #008000;">&#10003;</span></td>
+            <td class="has-text-centered" style="padding: 4px;"><span style="color: #008000;">&#10003;</span></td>
+            <td class="has-text-centered" style="padding: 4px;"><span style="color: #008000;">&#10003;</span></td>
+            <td class="has-text-centered" style="padding: 4px;"><span style="color: #008000;">&#10003;</span></td>
+            <td class="has-text-centered" style="padding: 4px;"><span style="color: #008000;">&#10003;</span></td>
+            <td class="has-text-centered" style="padding: 4px;"><span style="color: #008000;">&#10003;</span></td>
+            <td class="has-text-centered" style="padding: 4px;"><span style="color: #008000;">&#10003;</span></td>
+          </tr>
+
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
 
 
 <section class="section">
@@ -589,7 +677,7 @@
   <div class="container is-max-desktop">
     
     <h2 class="title is-4 has-text-centered">
-      Table 1: Factuality and hallucination performance across three representative architectures.
+      Table 2: Factuality and hallucination performance across three representative architectures.
     </h2>
 
     <div class="table-container">
@@ -681,7 +769,7 @@
       </div>
       <pre id="bibtex-code"><code>@article{FactualAlignment2026,
   title={RLHF for Trust Alignment},
-  author={Sindhuja Chaduvula, Azib Farooq, Ahmed, Shaina Raza},
+  author={Sindhuja Chaduvula, Azib Farooq, Ahmed Radwan, Shaina Raza},
   journal={ACL},
   year={2026},
   url={https://github.com/VectorInstitute/Factual-Preference-Alignment}
