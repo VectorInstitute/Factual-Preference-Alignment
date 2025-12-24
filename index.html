@@ -506,6 +506,80 @@
 
 <section class="section">
   <div class="container is-max-desktop">
+    <div class="columns is-centered">
+      <div class="column is-four-fifths">
+        
+        <div class="content" style="font-family: 'Latin Modern Roman', serif; background: #fff; padding: 20px; border: 2px solid #444; border-radius: 5px; box-shadow: 0 2px 5px rgba(0,0,0,0.1);">
+          
+          <h4 class="title is-5" style="border-bottom: 2px solid #444; padding-bottom: 10px; margin-bottom: 15px;">
+            <span style="font-weight: normal;">Algorithm 1:</span> FactualDPO Training
+          </h4>
+          
+          <div style="font-size: 1.1em; line-height: 1.6;">
+            
+            <div style="margin-bottom: 10px;">
+              <strong>Input:</strong> Dataset <em>D</em>, reference policy <em>&pi;<sub>ref</sub></em>, penalty <em>&lambda;</em>, temperature <em>&beta;</em><br>
+              <strong>Output:</strong> Trained policy <em>&pi;<sub>&theta;</sub></em>
+            </div>
+            
+            <hr style="margin: 10px 0; border-top: 1px solid #ddd;">
+
+            <div><em>&pi;<sub>&theta;</sub></em> &larr; <em>&pi;<sub>ref</sub></em></div>
+            
+            <div style="margin-top: 15px; color: #666; font-style: italic;">
+              // Phase 1: Label Transformation
+            </div>
+            
+            <div><strong>for each</strong> (<em>x, y<sub>w</sub>, y<sub>l</sub>, h<sub>w</sub>, h<sub>l</sub></em>) &isin; <em>D</em> <strong>do</strong></div>
+            <div style="padding-left: 2em; border-left: 1px solid #eee;">
+              <em>&Delta;h</em> &larr; <em>h<sub>l</sub> - h<sub>w</sub></em><br>
+              <strong>if</strong> <em>&Delta;h < 0</em> <strong>then</strong>
+              <div style="padding-left: 2em;">
+                (<em>y<sub>w</sub>, y<sub>l</sub>, h<sub>w</sub>, h<sub>l</sub></em>) &larr; (<em>y<sub>l</sub>, y<sub>w</sub>, h<sub>l</sub>, h<sub>w</sub></em>)
+              </div>
+            </div>
+
+            <div style="margin-top: 15px; color: #666; font-style: italic;">
+              // Phase 2: Training
+            </div>
+            
+            <div><strong>for</strong> each iteration <strong>do</strong></div>
+            <div style="padding-left: 2em; border-left: 1px solid #eee;">
+              Sample minibatch <em>B</em> &sub; <em>D</em><br>
+              
+              <strong>for each</strong> (<em>x, y<sub>w</sub>, y<sub>l</sub>, h<sub>w</sub>, h<sub>l</sub></em>) &isin; <em>B</em> <strong>do</strong>
+              <div style="padding-left: 2em; border-left: 1px solid #eee;">
+                <span style="color: #666; font-style: italic; font-size: 0.9em;">// Recompute after transformation (now &Delta;h &isin; {0,1})</span><br>
+                <em>&Delta;h</em> &larr; <em>h<sub>l</sub> - h<sub>w</sub></em><br>
+                
+                <em>m</em> &larr; log (<em>&pi;<sub>&theta;</sub></em>(<em>y<sub>w</sub></em>|<em>x</em>) / <em>&pi;<sub>&theta;</sub></em>(<em>y<sub>l</sub></em>|<em>x</em>)) 
+                &minus; log (<em>&pi;<sub>ref</sub></em>(<em>y<sub>w</sub></em>|<em>x</em>) / <em>&pi;<sub>ref</sub></em>(<em>y<sub>l</sub></em>|<em>x</em>))<br>
+                
+                <em>m<sup>fact</sup></em> &larr; <em>m</em> - <em>&lambda;</em> &middot; <em>&Delta;h</em>
+              </div>
+              
+              <em>L</em> &larr; - (1/|<em>B</em>|) &sum; log &sigma;(<em>&beta;</em> &middot; <em>m<sup>fact</sup></em>)<br>
+              Update <em>&theta;</em> via gradient descent on <em>L</em>
+            </div>
+
+            <div style="margin-top: 10px;"><strong>return</strong> <em>&pi;<sub>&theta;</sub></em></div>
+            
+          </div>
+        </div>
+        
+      </div>
+    </div>
+  </div>
+</section>
+
+
+
+
+
+
+
+<section class="section">
+  <div class="container is-max-desktop">
     
     <h2 class="title is-4 has-text-centered">
       Table 1: Factuality and hallucination performance across three representative architectures.
