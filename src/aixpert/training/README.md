@@ -36,7 +36,7 @@ The **Original DPO loss** is:
 \right]
 ```
 where:
-- ```math\(\pi_\theta\)``` is the trainable policy
+- ( \pi_\theta\ ) is the trainable policy
 - ```math\(\pi_{\text{ref}}\)``` is the frozen reference policy
 - ```math\(\beta\)``` is a temperature parameter
 - ```math\(\sigma(\cdot)\)``` is the sigmoid function
