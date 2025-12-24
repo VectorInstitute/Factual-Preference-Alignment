@@ -326,7 +326,7 @@ This project is built on top of **Hugging Face TRL (Transformer Reinforcement Le
 
 We reuse and extend TRL’s DPO training infrastructure to implement **Factual-DPO**, while preserving full compatibility with TRL’s training abstractions.
 
-🔗 **TRL Repository:**  
+🔗 **TRL Repository:**
 https://github.com/huggingface/trl
 
 ---
