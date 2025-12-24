@@ -401,8 +401,6 @@
 
 
 
-
-
 <!-- Image carousel -->
 <!-- <section class="hero is-small">
   <div class="hero-body">
@@ -506,7 +504,89 @@
   </section> -->
 <!--End paper poster -->
 
+<section class="section">
+  <div class="container is-max-desktop">
+    
+    <h2 class="title is-4 has-text-centered">
+      Table 1: Factuality and hallucination performance across three representative architectures.
+    </h2>
 
+    <div class="table-container">
+      <table class="table is-fullwidth is-hoverable" style="border-collapse: collapse; font-family: 'Latin Modern Roman', serif;">
+        
+        <thead>
+          <tr style="border-top: 2px solid black; border-bottom: 1px solid black;">
+            <th class="has-text-left">Model Variant</th>
+            <th class="has-text-centered">Factuality Score</th>
+            <th class="has-text-centered">Hallucination Rate</th>
+          </tr>
+        </thead>
+
+        <tbody>
+          
+          <tr style="background-color: #f9f9f9;">
+            <td colspan="3" style="font-weight: bold; padding-top: 10px;">Qwen2.5-14B-Instruct</td>
+          </tr>
+          <tr>
+            <td style="padding-left: 2em;">Base Model</td>
+            <td class="has-text-centered">7.8</td>
+            <td class="has-text-centered">0.072</td>
+          </tr>
+          <tr>
+            <td style="padding-left: 2em;">+ Standard DPO</td>
+            <td class="has-text-centered">7.9</td>
+            <td class="has-text-centered">0.080</td>
+          </tr>
+          <tr style="border-bottom: 1px solid #dbdbdb;">
+            <td style="padding-left: 2em;">+ Modified DPO (Ours)</td>
+            <td class="has-text-centered"><strong>8.838</strong></td>
+            <td class="has-text-centered"><strong>0.008</strong></td>
+          </tr>
+
+          <tr style="background-color: #f9f9f9;">
+            <td colspan="3" style="font-weight: bold; padding-top: 10px;">Qwen3-8B</td>
+          </tr>
+          <tr>
+            <td style="padding-left: 2em;">Base Model</td>
+            <td class="has-text-centered">5.26</td>
+            <td class="has-text-centered">0.424</td>
+          </tr>
+          <tr>
+            <td style="padding-left: 2em;">+ Standard DPO</td>
+            <td class="has-text-centered">6.14</td>
+            <td class="has-text-centered">0.302</td>
+          </tr>
+          <tr style="border-bottom: 1px solid #dbdbdb;">
+            <td style="padding-left: 2em;">+ Modified DPO (Ours)</td>
+            <td class="has-text-centered"><strong>7.9</strong></td>
+            <td class="has-text-centered"><strong>0.084</strong></td>
+          </tr>
+
+          <tr style="background-color: #f9f9f9;">
+            <td colspan="3" style="font-weight: bold; padding-top: 10px;">Gemma-2-9B-it</td>
+          </tr>
+          <tr>
+            <td style="padding-left: 2em;">Base Model</td>
+            <td class="has-text-centered">8.0</td>
+            <td class="has-text-centered">0.072</td>
+          </tr>
+          <tr>
+            <td style="padding-left: 2em;">+ Standard DPO</td>
+            <td class="has-text-centered">8.042</td>
+            <td class="has-text-centered">0.092</td>
+          </tr>
+          
+          <tr style="border-bottom: 2px solid black;">
+            <td style="padding-left: 2em;">+ Modified DPO (Ours)</td>
+            <td class="has-text-centered"><strong>8.26</strong></td>
+            <td class="has-text-centered"><strong>0.068</strong></td>
+          </tr>
+
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
 
 <!--BibTex citation -->
   <section class="section" id="BibTeX">
