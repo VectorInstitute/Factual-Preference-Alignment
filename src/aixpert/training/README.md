@@ -25,6 +25,7 @@ m(x, y_w, y_l) =
 -
 \log \frac{\pi_{\text{ref}}(y_w \mid x)}{\pi_{\text{ref}}(y_l \mid x)}
 \]
+```
 
 The **Original DPO loss** is:
 
@@ -37,7 +38,7 @@ The **Original DPO loss** is:
 \log \sigma\left(\beta \cdot m(x,y_w,y_l)\right)
 \right]
 \]
-
+```
 where:
 - \(\pi_\theta\) is the trainable policy
 - \(\pi_{\text{ref}}\) is the frozen reference policy
