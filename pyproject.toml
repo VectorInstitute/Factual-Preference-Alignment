@@ -120,7 +120,10 @@ mypy_path = "src"
 # -----------------------------------------------------
 [tool.ruff]
 include = ["*.py", "pyproject.toml", "*.ipynb"]
-exclude = []
+exclude = [
+    "trl",
+    "**/factualdpo_trainer.py",
+]
 line-length = 88
 
 [tool.ruff.format]
