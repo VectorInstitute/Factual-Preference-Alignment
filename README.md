@@ -11,7 +11,7 @@
   &nbsp;|&nbsp;
   <b>📄 Paper:</b> <a href="https://arxiv.org/abs/2505.11454">arxiv.org/abs/2505.11454</a>  
   &nbsp;|&nbsp;
-  <b>📊 Dataset:</b> <a href="https://huggingface.co/datasets/vector-institute/HumaniBench">Hugging Face</a>
+  <b>📊 Dataset:</b> <a href="https://huggingface.co/datasets/vector-institute/Factuality_Alignment">Hugging Face</a>
 </p>
 
 ---
