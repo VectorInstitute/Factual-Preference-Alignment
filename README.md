@@ -222,7 +222,7 @@ For dataset-related concerns, please contact the **Skywork authors** via their p
 
 ---
 
-## 📖 Citation (Factuality Preference Alignment)
+## 📖 Citation (Factual Preference Alignment)
 
 If you find this code or dataset useful for your research, please consider citing:
 
