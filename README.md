@@ -2,7 +2,7 @@
 ### A Modular Training Framework for Factual-Aware DPO
 
 <p align="center">
-  <img src="docs/assets/factualDPO.png" width="320"/>
+  <img src="docs/assets/factualDPO.png" width="500"/>
 </p>
 
 <p align="center">
