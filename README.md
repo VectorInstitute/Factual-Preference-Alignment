@@ -1,5 +1,5 @@
 # Reducing Hallucinations in LLMs via Factuality-Aware Preference Learning
-### A Modular Benchmark & Training Framework for Factual-Aware DPO
+### A Modular Training Framework for Factual-Aware DPO
 
 <p align="center">
   <img src="docs/assets/factualDPO.png" width="320"/>
