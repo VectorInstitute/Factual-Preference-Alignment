@@ -245,6 +245,6 @@ For questions, collaborations, or issues:
 
 ---
 
-### Factual DPO promotes in reducing hallucinations and increase factualness
+### ⚡ Factual DPO promotes in reducing hallucinations and increase factualness
 
 **We invite researchers and practitioners to build upon this framework.**
