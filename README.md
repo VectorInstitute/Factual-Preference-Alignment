@@ -1,5 +1,4 @@
-# AIXpert: Factual Preference Alignment for Large Language Models
-
+# Reducing Hallucinations in LLMs via Factuality-Aware Preference Learning
 ### A Modular Benchmark & Training Framework for Factual-Aware DPO
 
 <p align="center">
@@ -18,7 +17,7 @@
 
 ## 🧭 About
 
-**AIXpert Preference Alignment** is a full-stack **research and engineering framework** for studying and improving **factual alignment in preference-optimized Large Language Models (LLMs)**.
+**Factual Preference Alignment** is a **research and engineering framework** for studying and improving **factual alignment in preference-optimized Large Language Models (LLMs)**.
 
 The project introduces **Factual-DPO**, a factuality-aware extension of **Direct Preference Optimization (DPO)** that incorporates:
 
@@ -246,6 +245,6 @@ For questions, collaborations, or issues:
 
 ---
 
-### 🚀 AIXpert advances **factually aligned, preference-optimized language models** through principled data construction, training, and evaluation.
+### Factual DPO promotes in reducing hallucinations and increase factualness
 
 **We invite researchers and practitioners to build upon this framework.**
