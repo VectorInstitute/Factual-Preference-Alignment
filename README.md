@@ -1,80 +1,246 @@
-# AIXpert
+# AIXpert: Factual Preference Alignment for Large Language Models
 
-----------------------------------------------------------------------------------------
+### A Modular Benchmark & Training Framework for Factual-Aware DPO
 
-[![code checks](https://github.com/VectorInstitute/AIXpert/actions/workflows/code_checks.yml/badge.svg)](https://github.com/VectorInstitute/AIXpert/actions/workflows/code_checks.yml)
-[![unit tests](https://github.com/VectorInstitute/AIXpert/actions/workflows/unit_tests.yml/badge.svg)](https://github.com/VectorInstitute/AIXpert/actions/workflows/unit_tests.yml)
-[![integration tests](https://github.com/VectorInstitute/AIXpert/actions/workflows/integration_tests.yml/badge.svg)](https://github.com/VectorInstitute/AIXpert/actions/workflows/integration_tests.yml)
-[![docs](https://github.com/VectorInstitute/AIXpert/actions/workflows/docs.yml/badge.svg)](https://github.com/VectorInstitute/AIXpert/actions/workflows/docs.yml)
+<p align="center">
+  <b>🧠 Factual Alignment · 🧪 Preference Optimization · ⚙️ Reproducible AI Engineering</b>
+</p>
 
+<p align="center">
+  <b>📄 Paper:</b> <i>In Preparation</i>  
+  &nbsp;|&nbsp;
+  <b>📊 Base Dataset:</b>
+  <a href="https://huggingface.co/datasets/Skywork/Skywork-Reward-Preference-80K-v0.1">
+    Skywork-Reward-Preference-80K
+  </a>  
+  &nbsp;|&nbsp;
+  <b>🏛️ Affiliation:</b> Vector Institute for Artificial Intelligence
+</p>
 
-<!-- TODO: Uncomment this with the right credentials once codecov is set up for this repo.
-[![codecov](https://codecov.io/github/VectorInstitute/AIXpert/graph/badge.svg?token=83MYFZ3UPA)](https://codecov.io/github/VectorInstitute/AIXpert)
--->
-<!-- TODO: Uncomment this when the repository is made public
-![GitHub License](https://img.shields.io/github/license/VectorInstitute/AIXpert)
--->
+---
 
-<!--
-TODO: Add picture / logo
--->
+## 🧭 About
 
-<!--
-TODO: Add introduction about AIXpert here
--->
+**AIXpert Preference Alignment** is a full-stack **research and engineering framework** for studying and improving **factual alignment in preference-optimized Large Language Models (LLMs)**.
 
+The project introduces **Factual-DPO**, a factuality-aware extension of **Direct Preference Optimization (DPO)** that incorporates:
 
-## 🧑🏿‍💻 Installation
+* Explicit factuality supervision
+* Synthetic hallucination inversion
+* Margin-based factual penalties
 
-### Installing dependencies
+The repository provides **end-to-end infrastructure** for:
 
-The development environment can be set up using
-[uv](https://github.com/astral-sh/uv?tab=readme-ov-file#installation).
-Instructions for installing uv can be found [here](https://docs.astral.sh/uv/getting-started/installation/).
+* Dataset construction
+* Multi-model preference fine-tuning
+* Automated factuality evaluation
 
+All components are **config-driven**, reproducible, and aligned with the **Vector Institute AI Engineering Template**.
 
-Once installed, run:
+---
+
+## ✨ Key Contributions
+
+* 🔍 Binary factuality supervision integrated into preference learning
+* 🧪 Synthetic hallucination inversion pairs
+* 📐 Δ-margin factual penalties for controllable hallucination suppression
+* ⚙️ Fully config-driven data, training, and evaluation pipelines
+* 📊 Multi-model × multi-Δ benchmarking at scale
+
+---
+
+## 📦 Repository Structure
+
+```
+aixpert/
+│
+├── src/aixpert/
+│   ├── config/                  # Central config.yaml
+│   ├── data_construction/       # 8-stage factual dataset pipeline
+│   ├── training/                # Original-DPO & Factual-DPO training
+│   ├── evaluation/              # GPT-4o-mini judge evaluation
+│   └── utils/                   # Shared helpers
+│
+├── README.md
+└── pyproject.toml
+```
+
+---
+
+## 🧠 What Is Factual-DPO?
+
+Standard DPO aligns models to **human preferences**, but does not explicitly discourage **hallucinated yet preferred responses**.
+
+**Factual-DPO** introduces a factuality-aware margin:
+
+* Each preference tuple includes `(h_w, h_l)` factuality indicators
+* A penalty λ is applied when the preferred response is less factual
+* Optimization pressure shifts toward **factually correct preferences**
+
+➡️ Result: **Lower hallucination rates without sacrificing preference alignment**
+
+---
+
+## 🔬 Skywork → Factual-DPO Data Construction Pipeline
+
+This repository contains a complete **eight-stage pipeline** for converting the **Skywork Reward-Preference-80K** dataset into **balanced, factual-aware DPO datasets**.
+
+### Pipeline Stages
+
+| Stage | Description                             |
+| ----- | --------------------------------------- |
+| 1     | Skywork extraction & de-duplication     |
+| 2     | Preference pair conversion              |
+| 3     | Binary factuality scoring (GPT-4o-mini) |
+| 4     | Canonical DPO transformation            |
+| 5     | Synthetic hallucination generation      |
+| 6     | Dataset merging                         |
+| 7     | Balanced bucket construction            |
+| 8     | Optional preference flipping            |
+
+All paths and parameters are defined in:
+
+```
+src/aixpert/config/config.yaml
+```
+
+---
+
+## ⚙️ Configuration-Driven Design
+
+Every component — **datasets, models, hyperparameters, outputs, and evaluation** — is controlled via:
+
+```
+src/aixpert/config/config.yaml
+```
+
+Loaded using:
+
+```python
+from utils.config_loader import load_config
+cfg = load_config()
+```
+
+This enables:
+
+* Full reproducibility
+* Multi-model automation
+* Zero hard-coded paths
+
+---
+
+## 🏋️ Training Pipelines
+
+### 1️⃣ Original-DPO (Baseline)
 
 ```bash
-uv sync
-source .venv/bin/activate
+python -m aixpert.training.run_dpo_training \
+  --model "google/gemma-2-9b-it"
 ```
-Note that uv supports [optional dependency groups](https://docs.astral.sh/uv/concepts/projects/dependencies/#dependency-groups)
-which helps to manage dependencies for different parts of development such as
-`documentation`, `testing`, etc.
-The core dependencies are installed using the command `uv sync`
 
-In order to install dependencies for testing (codestyle, unit tests, integration tests),
-run:
+Trains standard DPO using Skywork preferences.
+
+---
+
+### 2️⃣ Factual-DPO (Δ-Margin Training)
 
 ```bash
-uv sync --dev
-source .venv/bin/activate
+python -m aixpert.training.run_factual_training \
+  --model_id "google/gemma-2-9b-it" \
+  --short "gemma2-9b" \
+  --delta 10
 ```
 
-In order to exclude installation of packages from a specific group (e.g. docs),
-run:
+Each Δ value produces a **separate fine-tuned model**.
+
+---
+
+## 📊 Evaluation Pipeline
+
+Evaluation is performed using **GPT-4o-mini as an LLM-as-a-Judge**.
+
+### Metrics
+
+| Metric      | Meaning                   |
+| ----------- | ------------------------- |
+| factuality  | Mean factual score        |
+| halluc_rate | % outputs below threshold |
+| win_rate    | Δ-model vs baseline       |
+| count       | Prompts evaluated         |
+
+Run evaluation:
 
 ```bash
-uv sync --no-group docs
+python -m aixpert.evaluation.evaluations.run_all_evaluations
 ```
 
-## Getting Started
+Outputs:
 
-## Features / Components
+```
+eval_results.json
+```
 
-## Examples
+---
 
-## Contributing
-If you are interested in contributing to the library, please see
-[CONTRIBUTING.MD](CONTRIBUTING.MD). This file contains many details around contributing
-to the code base, including development practices, code checks, tests, and more.
+## 🧪 Supported Models
 
-<!--
-TODO:
+* Gemma-2 (2B, 9B)
+* Qwen-2.5 / Qwen-3
+* LLaMA-3.x
+* Any TRL-compatible causal LLM
 
-## Acknowledgements
+Models are registered centrally in `config.yaml`.
 
-## Citation
+---
 
--->
+## 🧰 Frameworks & Tooling
+
+* **Hugging Face TRL** — DPO reference implementation
+* **Unsloth** — QLoRA optimization
+* **BitsAndBytes** — 4-bit quantization
+* **Flash-Attention-2**
+* **Weights & Biases** — experiment tracking
+* **Accelerate** — multi-GPU orchestration
+
+---
+
+## 📚 Dataset Attribution & Credits
+
+This project **builds upon and extends** the **Skywork Reward-Preference-80K** dataset.
+
+> **We do not claim ownership of the Skywork dataset.**
+> All credit belongs to the original authors.
+
+If you use this repository, **please cite Skywork**:
+
+```bibtex
+@article{liu2024skywork,
+  title={Skywork-Reward: Bag of Tricks for Reward Modeling in LLMs},
+  author={Liu, Chris Yuhao and Zeng, Liang and Liu, Jiacai and Yan, Rui and He, Jujie and Wang, Chaojie and Yan, Shuicheng and Liu, Yang and Zhou, Yahui},
+  journal={arXiv preprint arXiv:2410.18451},
+  year={2024}
+}
+```
+
+For dataset-related concerns, please contact the **Skywork authors** via their paper or Hugging Face repository.
+
+---
+
+## 📖 Citation (AIXpert / Factual-DPO)
+
+A citation for this work will be released with the accompanying paper.
+
+---
+
+## 📬 Contact
+
+For questions, collaborations, or issues:
+
+* Open a GitHub Issue
+* Or contact the maintainers via the Vector Institute
+
+---
+
+### 🚀 AIXpert advances **factually aligned, preference-optimized language models** through principled data construction, training, and evaluation.
+
+**We invite researchers and practitioners to build upon this framework.**
