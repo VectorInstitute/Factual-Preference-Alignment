@@ -3,18 +3,15 @@
 ### A Modular Benchmark & Training Framework for Factual-Aware DPO
 
 <p align="center">
-  <b>🧠 Factual Alignment · 🧪 Preference Optimization · ⚙️ Reproducible AI Engineering</b>
+  <img src="https://github.com/user-attachments/assets/ebed8e26-5bdf-48c1-ae41-0775b8c33c0a" alt="HumaniBench Logo" width="300"/>
 </p>
 
 <p align="center">
-  <b>📄 Paper:</b> <i>In Preparation</i>  
+  <b>🌐 Website:</b> <a href="https://vectorinstitute.github.io/humanibench/">vectorinstitute.github.io/humanibench</a>  
   &nbsp;|&nbsp;
-  <b>📊 Base Dataset:</b>
-  <a href="https://huggingface.co/datasets/Skywork/Skywork-Reward-Preference-80K-v0.1">
-    Skywork-Reward-Preference-80K
-  </a>  
+  <b>📄 Paper:</b> <a href="https://arxiv.org/abs/2505.11454">arxiv.org/abs/2505.11454</a>  
   &nbsp;|&nbsp;
-  <b>🏛️ Affiliation:</b> Vector Institute for Artificial Intelligence
+  <b>📊 Dataset:</b> <a href="https://huggingface.co/datasets/vector-institute/HumaniBench">Hugging Face</a>
 </p>
 
 ---
