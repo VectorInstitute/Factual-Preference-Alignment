@@ -2,7 +2,7 @@
 ### A Modular Benchmark & Training Framework for Factual-Aware DPO
 
 <p align="center">
-  <img src="https://github.com/user-attachments/assets/ebed8e26-5bdf-48c1-ae41-0775b8c33c0a" alt="HumaniBench Logo" width="300"/>
+  <img src="assets/factual_dpo_logo.png" width="300"/>
 </p>
 
 <p align="center">
