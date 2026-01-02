@@ -24,6 +24,9 @@ on:
       - uv.lock
       - pyproject.toml
       - '**.ipynb'
+    paths-ignore:
+      - "trl/**"
+      - "**/factualdpo_trainer.py"
 
 jobs:
   run-code-check:

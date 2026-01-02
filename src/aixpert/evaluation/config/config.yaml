@@ -1,0 +1,26 @@
+eval:
+  data_file: "src/aixpert/data_construction/data/skywork_extracted_test.jsonl"
+  batch_size: 16
+  max_new_tokens: 2048
+  judge_concurrency: 10
+
+paths:
+  original_root: "src/aixpert/training/data/original/Models"
+  factual_root: "src/aixpert/training/data/factual/Models"
+
+models:
+  - short: "gemma2-9b"
+  - short: "qwen2.5-14b"
+  - short: "llama3.2-1b"
+  - short: "gemma2-2b"
+  - short: "llama3-8b"
+  - short: "qwen2-7b"
+  - short: "qwen3-8b"
+
+deltas: [0, 2, 4, 6, 8, 10, 20, 30, 50, 100]
+
+llm-as-judge:
+  name: gpt-4o-mini   # or gpt-4o
+  temperature: 0.8
+
+openai_api_key: "${OPENAI_API_KEY}"
