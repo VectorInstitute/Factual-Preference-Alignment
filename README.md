@@ -223,9 +223,17 @@ For dataset-related concerns, please contact the **Skywork authors** via their p
 
 ---
 
-## 📖 Citation (AIXpert / Factual-DPO)
+## 📖 Citation (Factuality Preference Alignment)
 
-A citation for this work will be released with the accompanying paper.
+If you find this code or dataset useful for your research, please consider citing:
+
+```bibtex
+@article{chaduvula2026factualdpo,
+  title={Reducing Hallucinations in LLMs via Factuality-Aware Preference Learning},
+  author={Sindhuja Chaduvula, Azib Farooq, Ahmed Radwan, Shaina Raza},
+  journal={arXiv preprint arXiv:XXXX.XXXXX},
+  year={2026}
+}
 
 ---
 
