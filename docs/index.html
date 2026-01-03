@@ -363,7 +363,7 @@
         <div class="content has-text-justified">
           <!-- TODO: Replace with your paper abstract -->
           <p>
-            Preference alignment methods such as RLHF and Direct Preference Optimization (DPO) improve instruction following, but they can also reinforce hallucinations when preference judgments reward fluency and confidence over factual correctness. We introduce \textbf{\textbf{F-DPO}} (\textbf{F}actuality-aware \textbf{D}irect \textbf{P}reference \textbf{O}ptimization), a simple extension of DPO that uses only binary factuality labels. \textbf{F-DPO} (i) applies a label-flipping transformation that corrects misordered preference pairs so the chosen response is never less factual than the rejected one, and (ii) adds a factuality-aware margin that emphasizes pairs with clear correctness differences, while reducing to standard DPO when both responses share the same factuality. We construct factuality-aware preference data by augmenting DPO pairs with binary factuality indicators and synthetic hallucinated variants. Across seven open-weight LLMs (1B--14B), \textbf{F-DPO} consistently improves factuality and reduces hallucination rates relative to both base models and standard DPO. On Qwen3-8B, F-DPO reduces hallucination rates by 5$\times$ (from 0.424 to 0.084) while improving factuality scores by 50\% (from 5.26 to 7.90). F-DPO also generalizes to out-of-distribution benchmarks: on TruthfulQA, Qwen2.5-14B achieves +17\% MC1 accuracy (0.500 to 0.585) and +49\% MC2 accuracy (0.357 to 0.531). F-DPO requires no auxiliary reward model, token-level annotations, or multi-stage training.
+            Preference alignment methods such as RLHF and Direct Preference Optimization (DPO) improve instruction following, but they can also reinforce hallucinations when preference judgments reward fluency and confidence over factual correctness. We introduce <strong>F-DPO</strong> (<strong>F</strong>actuality-aware <strong>D</strong>irect <strong>P</strong>reference <strong>O</strong>ptimization), a simple extension of DPO that uses only binary factuality labels. <strong>F-DPO</strong> (i) applies a label-flipping transformation that corrects misordered preference pairs so the chosen response is never less factual than the rejected one, and (ii) adds a factuality-aware margin that emphasizes pairs with clear correctness differences, while reducing to standard DPO when both responses share the same factuality. We construct factuality-aware preference data by augmenting DPO pairs with binary factuality indicators and synthetic hallucinated variants. Across seven open-weight LLMs (1B–14B), <strong>F-DPO</strong> consistently improves factuality and reduces hallucination rates relative to both base models and standard DPO. On Qwen3-8B, F-DPO reduces hallucination rates by 5× (from 0.424 to 0.084) while improving factuality scores by 50% (from 5.26 to 7.90). F-DPO also generalizes to out-of-distribution benchmarks: on TruthfulQA, Qwen2.5-14B achieves +17% MC1 accuracy (0.500 to 0.585) and +49% MC2 accuracy (0.357 to 0.531). F-DPO requires no auxiliary reward model, token-level annotations, or multi-stage training.
           </p>
         </div>
       </div>
@@ -723,7 +723,7 @@
   <div class="container is-max-desktop">
 
     <h2 class="title is-4 has-text-centered">
-      Table 3: Ablation — Effect of label flipping (λ = 100).
+      Table 2: Ablation — Effect of label flipping (λ = 100).
     </h2>
 
     <div class="table-container">
