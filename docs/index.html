@@ -239,7 +239,7 @@
             <!-- <img src="static/images/factualDPO.png" alt="Project Logo" style="width: 120px; margin-bottom: 20px;"> -->
             <h1 class="title is-1 publication-title">
               <img src="static/images/factualDPO.png" alt="Logo" style="width: 1.2em; vertical-align: middle; margin-right: 10px;">
-              Factuality Preference Alignment</h1>
+              Reducing Hallucinations in LLMs via Factuality-Aware Preference Learning</h1>
             <div class="is-size-5 publication-authors">
               <!-- TODO: Replace with your paper authors and their personal links -->
               <span class="author-block">
@@ -297,7 +297,7 @@
                 </span>
 
                 <span class="link-block">
-                  <a href="YOUR_DATASET_URL" target="_blank"
+                  <a href="https://huggingface.co/datasets/vector-institute/Factuality_Alignment" target="_blank"
                   class="external-link button is-normal is-rounded is-dark">
                     <span class="icon">
                       <i class="fas fa-database"></i>
@@ -363,7 +363,7 @@
         <div class="content has-text-justified">
           <!-- TODO: Replace with your paper abstract -->
           <p>
-            Large language models (LLMs) increasingly act in sensitive decision-making contexts, demanding not only accuracy and safety but also trustworthiness. Existing RLHF pipelines optimize for helpfulness or harmlessness but fail to model human trust as an explicit reward dimension. We introduce TrustAlign, an RLHF-based framework that integrates trust feedback—quantifying honesty, reliability, and fairness—into the reward modeling and policy optimization loop. TrustAlign leverages both human and LLM-as-a-judge trust assessments to produce a composite trust reward used in Direct Preference Optimization (DPO) or PPO fine-tuning. Evaluated on TrustBench, TruthfulQA, and ----Fairness benchmarks, TrustAlign improves trust calibration by up to ---\%, reduces hallucination rates, and enhances fairness metrics compared to conventional RLHF and Constitutional AI baselines. Our results demonstrate that modeling trust as an explicit alignment signal produces more dependable and socially aligned agents.
+            Preference alignment methods such as RLHF and Direct Preference Optimization (DPO) improve instruction following, but they can also reinforce hallucinations when preference judgments reward fluency and confidence over factual correctness. We introduce \textbf{\textbf{F-DPO}} (\textbf{F}actuality-aware \textbf{D}irect \textbf{P}reference \textbf{O}ptimization), a simple extension of DPO that uses only binary factuality labels. \textbf{F-DPO} (i) applies a label-flipping transformation that corrects misordered preference pairs so the chosen response is never less factual than the rejected one, and (ii) adds a factuality-aware margin that emphasizes pairs with clear correctness differences, while reducing to standard DPO when both responses share the same factuality. We construct factuality-aware preference data by augmenting DPO pairs with binary factuality indicators and synthetic hallucinated variants. Across seven open-weight LLMs (1B--14B), \textbf{F-DPO} consistently improves factuality and reduces hallucination rates relative to both base models and standard DPO. On Qwen3-8B, F-DPO reduces hallucination rates by 5$\times$ (from 0.424 to 0.084) while improving factuality scores by 50\% (from 5.26 to 7.90). F-DPO also generalizes to out-of-distribution benchmarks: on TruthfulQA, Qwen2.5-14B achieves +17\% MC1 accuracy (0.500 to 0.585) and +49\% MC2 accuracy (0.357 to 0.531). F-DPO requires no auxiliary reward model, token-level annotations, or multi-stage training.
           </p>
         </div>
       </div>
@@ -400,12 +400,12 @@
         <tbody>
 
           <tr>
-            <td class="has-text-left" style="white-space: nowrap; padding: 4px;">FActS-DPO</td>
+            <td class="has-text-left" style="white-space: nowrap; padding: 4px;">Standard-DPO</td>
             <td class="has-text-centered" style="padding: 4px;"><span style="color: #008000;">&#10003;</span></td>
             <td class="has-text-centered" style="padding: 4px;"><span style="color: red;">&#10007;</span></td>
             <td class="has-text-centered" style="padding: 4px;"><span style="color: red;">&#10007;</span></td>
-            <td class="has-text-centered" style="padding: 4px;"><span style="color: #008000;">&#10003;</span></td>
-            <td class="has-text-centered" style="padding: 4px;"><span style="color: red;">&#10007;</span></td>
+            <td class="has-text-centered" style="padding: 4px;"><span style="color: red;">&#10003;</span></td>
+            <td class="has-text-centered" style="padding: 4px;"><span style="color: #008000;">&#10007;</span></td>
             <td class="has-text-centered" style="padding: 4px;"><span style="color: #008000;">&#10003;</span></td>
             <td class="has-text-centered" style="padding: 4px;"><span style="color: #008000;">&#10003;</span></td>
           </tr>
@@ -422,6 +422,17 @@
           </tr>
 
           <tr>
+            <td class="has-text-left" style="white-space: nowrap; padding: 4px;">FactTune</td>
+            <td class="has-text-centered" style="padding: 4px;"><span style="color: #008000;">&#10003;</span></td>
+            <td class="has-text-centered" style="padding: 4px;"><span style="color: red;">&#10003;</span></td>
+            <td class="has-text-centered" style="padding: 4px;"><span style="color: red;">&#10007;</span></td>
+            <td class="has-text-centered" style="padding: 4px;"><span style="color: #008000;">&#10003;</span></td>
+            <td class="has-text-centered" style="padding: 4px;"><span style="color: red;">&#10007;</span></td>
+            <td class="has-text-centered" style="padding: 4px;"><span style="color: #008000;">&#10007;</span></td>
+            <td class="has-text-centered" style="padding: 4px;"><span style="color: #008000;">&#10007;</span></td>
+          </tr>
+
+          <tr>
             <td class="has-text-left" style="white-space: nowrap; padding: 4px;">Context-DPO</td>
             <td class="has-text-centered" style="padding: 4px;"><span style="color: #008000;">&#10003;</span></td>
             <td class="has-text-centered" style="padding: 4px;"><span style="color: red;">&#10007;</span></td>
@@ -433,9 +444,20 @@
           </tr>
 
           <tr>
-            <td class="has-text-left" style="white-space: nowrap; padding: 4px;">Self-Generated DPO</td>
+            <td class="has-text-left" style="white-space: nowrap; padding: 4px;">Flame</td>
+            <td class="has-text-centered" style="padding: 4px;"><span style="color: red;">&#10003;</span></td>
+            <td class="has-text-centered" style="padding: 4px;"><span style="color: red;">&#10007;</span></td>
+            <td class="has-text-centered" style="padding: 4px;"><span style="color: red;">&#10007;</span></td>
             <td class="has-text-centered" style="padding: 4px;"><span style="color: #008000;">&#10003;</span></td>
+            <td class="has-text-centered" style="padding: 4px;"><span style="color: red;">&#10007;</span></td>
             <td class="has-text-centered" style="padding: 4px;"><span style="color: #008000;">&#10003;</span></td>
+            <td class="has-text-centered" style="padding: 4px;"><span style="color: red;">&#10003;</span></td>
+          </tr>
+
+          <tr>
+            <td class="has-text-left" style="white-space: nowrap; padding: 4px;">Self-alignment DPO</td>
+            <td class="has-text-centered" style="padding: 4px;"><span style="color: #008000;">&#10003;</span></td>
+            <td class="has-text-centered" style="padding: 4px;"><span style="color: red;">&#10003;</span></td>
             <td class="has-text-centered" style="padding: 4px;"><span style="color: red;">&#10007;</span></td>
             <td class="has-text-centered" style="padding: 4px;"><span style="color: #008000;">&#10003;</span></td>
             <td class="has-text-centered" style="padding: 4px;"><span style="color: #008000;">&#10003;</span></td>
@@ -701,84 +723,152 @@
   <div class="container is-max-desktop">
 
     <h2 class="title is-4 has-text-centered">
-      Table 2: Factuality and hallucination performance across three representative architectures.
+      Table 3: Ablation — Effect of label flipping (λ = 100).
     </h2>
 
     <div class="table-container">
-      <table class="table is-fullwidth is-hoverable" style="border-collapse: collapse; font-family: 'Latin Modern Roman', serif;">
+      <table class="table is-fullwidth is-hoverable"
+             style="border-collapse: collapse; font-family: 'Latin Modern Roman', serif;">
 
         <thead>
           <tr style="border-top: 2px solid black; border-bottom: 1px solid black;">
-            <th class="has-text-left">Model Variant</th>
-            <th class="has-text-centered">Factuality Score</th>
-            <th class="has-text-centered">Hallucination Rate</th>
+            <th class="has-text-left">Model</th>
+            <th class="has-text-left">Method</th>
+            <th class="has-text-centered">Hal. ↓</th>
+            <th class="has-text-centered">Fact.</th>
+            <th class="has-text-centered">Win ↑</th>
           </tr>
         </thead>
 
         <tbody>
 
+          <!-- ================= Gemma-2-9B ================= -->
           <tr style="background-color: #f9f9f9;">
-            <td colspan="3" style="font-weight: bold; padding-top: 10px;">Qwen2.5-14B-Instruct</td>
+            <td colspan="5" style="font-weight: bold; padding-top: 10px;">
+              Gemma-2-9B
+            </td>
           </tr>
           <tr>
-            <td style="padding-left: 2em;">Base Model</td>
-            <td class="has-text-centered">7.8</td>
-            <td class="has-text-centered">0.072</td>
+            <td></td>
+            <td>Standard DPO</td>
+            <td class="has-text-centered">0.082</td>
+            <td class="has-text-centered">8.12</td>
+            <td class="has-text-centered">—</td>
+          </tr>
+          <tr style="background-color: #fff6db;">
+            <td></td>
+            <td><strong>F-DPO</strong> (No Flip)</td>
+            <td class="has-text-centered">0.088</td>
+            <td class="has-text-centered">8.06</td>
+            <td class="has-text-centered">0.49</td>
+          </tr>
+          <tr style="background-color: #e6f4ea;">
+            <td></td>
+            <td><strong>F-DPO</strong> (+Flip)</td>
+            <td class="has-text-centered"><strong>0.064</strong></td>
+            <td class="has-text-centered"><strong>8.31</strong></td>
+            <td class="has-text-centered"><strong>0.57</strong></td>
+          </tr>
+
+          <!-- ================= Qwen2.5-14B ================= -->
+          <tr style="background-color: #f9f9f9;">
+            <td colspan="5" style="font-weight: bold; padding-top: 10px;">
+              Qwen2.5-14B
+            </td>
           </tr>
           <tr>
-            <td style="padding-left: 2em;">+ Standard DPO</td>
-            <td class="has-text-centered">7.9</td>
-            <td class="has-text-centered">0.080</td>
+            <td></td>
+            <td>Standard DPO</td>
+            <td class="has-text-centered">0.084</td>
+            <td class="has-text-centered">7.92</td>
+            <td class="has-text-centered">—</td>
           </tr>
-          <tr style="border-bottom: 1px solid #dbdbdb;">
-            <td style="padding-left: 2em;">+ Modified DPO (Ours)</td>
-            <td class="has-text-centered"><strong>8.838</strong></td>
+          <tr style="background-color: #fff6db;">
+            <td></td>
+            <td><strong>F-DPO</strong> (No Flip)</td>
+            <td class="has-text-centered">0.032</td>
+            <td class="has-text-centered">8.49</td>
+            <td class="has-text-centered">0.70</td>
+          </tr>
+          <tr style="background-color: #e6f4ea;">
+            <td></td>
+            <td><strong>F-DPO</strong> (+Flip)</td>
             <td class="has-text-centered"><strong>0.008</strong></td>
+            <td class="has-text-centered"><strong>8.84</strong></td>
+            <td class="has-text-centered"><strong>0.78</strong></td>
           </tr>
 
+          <!-- ================= LLaMA-3-8B ================= -->
           <tr style="background-color: #f9f9f9;">
-            <td colspan="3" style="font-weight: bold; padding-top: 10px;">Qwen3-8B</td>
+            <td colspan="5" style="font-weight: bold; padding-top: 10px;">
+              LLaMA-3-8B
+            </td>
           </tr>
           <tr>
-            <td style="padding-left: 2em;">Base Model</td>
-            <td class="has-text-centered">5.26</td>
-            <td class="has-text-centered">0.424</td>
+            <td></td>
+            <td>Standard DPO</td>
+            <td class="has-text-centered">0.290</td>
+            <td class="has-text-centered">6.05</td>
+            <td class="has-text-centered">—</td>
           </tr>
-          <tr>
-            <td style="padding-left: 2em;">+ Standard DPO</td>
-            <td class="has-text-centered">6.14</td>
-            <td class="has-text-centered">0.302</td>
+          <tr style="background-color: #fff6db;">
+            <td></td>
+            <td><strong>F-DPO</strong> (No Flip)</td>
+            <td class="has-text-centered">0.234</td>
+            <td class="has-text-centered">6.50</td>
+            <td class="has-text-centered">0.56</td>
           </tr>
-          <tr style="border-bottom: 1px solid #dbdbdb;">
-            <td style="padding-left: 2em;">+ Modified DPO (Ours)</td>
-            <td class="has-text-centered"><strong>7.9</strong></td>
-            <td class="has-text-centered"><strong>0.084</strong></td>
+          <tr style="background-color: #e6f4ea;">
+            <td></td>
+            <td><strong>F-DPO</strong> (+Flip)</td>
+            <td class="has-text-centered"><strong>0.122</strong></td>
+            <td class="has-text-centered"><strong>7.10</strong></td>
+            <td class="has-text-centered"><strong>0.72</strong></td>
           </tr>
 
+          <!-- ================= Qwen3-8B ================= -->
           <tr style="background-color: #f9f9f9;">
-            <td colspan="3" style="font-weight: bold; padding-top: 10px;">Gemma-2-9B-it</td>
+            <td colspan="5" style="font-weight: bold; padding-top: 10px;">
+              Qwen3-8B
+            </td>
           </tr>
           <tr>
-            <td style="padding-left: 2em;">Base Model</td>
-            <td class="has-text-centered">8.0</td>
-            <td class="has-text-centered">0.072</td>
+            <td></td>
+            <td>Standard DPO</td>
+            <td class="has-text-centered">0.300</td>
+            <td class="has-text-centered">6.08</td>
+            <td class="has-text-centered">—</td>
           </tr>
-          <tr>
-            <td style="padding-left: 2em;">+ Standard DPO</td>
-            <td class="has-text-centered">8.042</td>
-            <td class="has-text-centered">0.092</td>
+          <tr style="background-color: #fff6db;">
+            <td></td>
+            <td><strong>F-DPO</strong> (No Flip)</td>
+            <td class="has-text-centered">0.150</td>
+            <td class="has-text-centered">7.14</td>
+            <td class="has-text-centered">0.66</td>
           </tr>
-
-          <tr style="border-bottom: 2px solid black;">
-            <td style="padding-left: 2em;">+ Modified DPO (Ours)</td>
-            <td class="has-text-centered"><strong>8.26</strong></td>
-            <td class="has-text-centered"><strong>0.068</strong></td>
+          <tr style="background-color: #e6f4ea; border-bottom: 2px solid black;">
+            <td></td>
+            <td><strong>F-DPO</strong> (+Flip)</td>
+            <td class="has-text-centered"><strong>0.080</strong></td>
+            <td class="has-text-centered"><strong>7.90</strong></td>
+            <td class="has-text-centered"><strong>0.70</strong></td>
           </tr>
 
         </tbody>
       </table>
     </div>
+
+    <p class="has-text-centered is-size-7">
+      <span style="background-color:#e6f4ea;padding:2px 6px;">Green</span>:
+      best per model;
+      <span style="background-color:#fff6db;padding:2px 6px;">Yellow</span>:
+      improvement over Standard DPO;
+      “—” indicates not applicable.
+    </p>
+
   </div>
+</section>
+
 </section>
 
 <!--BibTex citation -->
@@ -792,7 +882,7 @@
         </button>
       </div>
       <pre id="bibtex-code"><code>@article{FactualAlignment2026,
-  title={Factuality Preference Alignment},
+  title={Reducing Hallucinations in LLMs via Factuality-Aware Preference Learning},
   author={Sindhuja Chaduvula, Azib Farooq, Ahmed Radwan, Shaina Raza},
   journal={ACL},
   year={2026},
