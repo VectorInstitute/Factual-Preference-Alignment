@@ -6,7 +6,7 @@
 </p>
 
 <p align="center">
-  <b>🌐 Website:</b> <a href="https://vectorinstitute.github.io/Factual-Preference-Alignment/">vectorinstitute.github.io/factualdpo</a>  
+  <b>🌐 Website:</b> <a href="https://vectorinstitute.github.io/Factual-Preference-Alignment/">vectorinstitute.github.io/Factual-Preference-Alignment</a>  
   &nbsp;|&nbsp;
   <b>📄 Paper:</b> <a href="https://arxiv.org/abs/2505.11454">arxiv.org/abs/2505.11454</a>  
   &nbsp;|&nbsp;
