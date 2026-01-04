@@ -227,7 +227,7 @@ For dataset-related concerns, please contact the **Skywork authors** via their p
 If you find this code or dataset useful for your research, please consider citing:
 
 ```bibtex
-@article{chaduvula2026factualdpo,
+@article{FactualAlignment2026,
   title={Reducing Hallucinations in LLMs via Factuality-Aware Preference Learning},
   author={Sindhuja Chaduvula, Azib Farooq, Ahmed Radwan, Shaina Raza},
   journal={arXiv preprint arXiv:XXXX.XXXXX},
