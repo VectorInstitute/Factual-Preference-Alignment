@@ -1,5 +1,5 @@
 # Reducing Hallucinations in LLMs via Factuality-Aware Preference Learning
-### A Modular Training Framework for Factual-Aware DPO
+### A Modular Training Framework for Factuality-Aware Direct Preference Optimization(F-DPO)
 
 <p align="center" style="margin-top: -10px; margin-bottom: -10px;">
   <img src="docs/assets/factualDPO.png" width="320"/>
@@ -19,7 +19,7 @@
 
 **Factuality-aware Direct Preference Optimization** is a **research and engineering framework** for studying and improving **factual alignment in preference-optimized Large Language Models (LLMs)**.
 
-The project introduces **Factual-DPO**, a factuality-aware extension of **Direct Preference Optimization (DPO)** that incorporates:
+The project introduces **F-DPO**, a factuality-aware extension of **Direct Preference Optimization (DPO)** that incorporates:
 
 * Explicit factuality supervision
 * Synthetic hallucination inversion
@@ -53,7 +53,7 @@ aixpert/
 ├── src/aixpert/
 │   ├── config/                  # Central config.yaml
 │   ├── data_construction/       # 8-stage factual dataset pipeline
-│   ├── training/                # Original-DPO & Factual-DPO training
+│   ├── training/                # Original-DPO & F-DPO training
 │   ├── evaluation/              # GPT-4o-mini judge evaluation
 │   └── utils/                   # Shared helpers
 │
@@ -63,11 +63,11 @@ aixpert/
 
 ---
 
-## 🧠 What Is Factual-DPO?
+## 🧠 What Is F-DPO?
 
 Standard DPO aligns models to **human preferences**, but does not explicitly discourage **hallucinated yet preferred responses**.
 
-**Factual-DPO** introduces a factuality-aware margin:
+**F-DPO** introduces a factuality-aware margin:
 
 * Each preference tuple includes `(h_w, h_l)` factuality indicators
 * A penalty λ is applied when the preferred response is less factual
@@ -77,7 +77,7 @@ Standard DPO aligns models to **human preferences**, but does not explicitly dis
 
 ---
 
-## 🔬 Skywork → Factual-DPO Data Construction Pipeline
+## 🔬 Skywork → F-DPO Data Construction Pipeline
 
 This repository contains a complete **eight-stage pipeline** for converting the **Skywork Reward-Preference-80K** dataset into **balanced, factual-aware DPO datasets**.
 
@@ -138,7 +138,7 @@ Trains standard DPO using Skywork preferences.
 
 ---
 
-### 2️⃣ Factual-DPO (Δ-Margin Training)
+### 2️⃣ F-DPO (Δ-Margin Training)
 
 ```bash
 python -m aixpert.training.run_factual_training \
