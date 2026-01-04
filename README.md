@@ -222,29 +222,6 @@ For dataset-related concerns, please contact the **Skywork authors** via their p
 
 ---
 
-## 📖 Citation (Factuality-aware Direct Preference Optimization)
-
-If you find this code or dataset useful for your research, please consider citing:
-
-```bibtex
-@article{FactualAlignment2026,
-  title={Reducing Hallucinations in LLMs via Factuality-Aware Preference Learning},
-  author={Sindhuja Chaduvula, Azib Farooq, Ahmed Radwan, Yani Ioannou, Shaina Raza},
-  journal={arXiv preprint arXiv:XXXX.XXXXX},
-  year={2026}
-}
-```
----
-
-## 📬 Contact
-
-For questions, collaborations, or issues:
-
-* Open a GitHub Issue
-* Or contact the maintainers via the Vector Institute
-
----
-
 ### ⚡ Factuality-aware Direct Preference Optimization promotes in reducing hallucinations and increase factualness
 
 **We invite researchers and practitioners to build upon this framework.**
