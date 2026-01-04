@@ -17,7 +17,7 @@
 
 ## 🧭 About
 
-**Factual Preference Alignment** is a **research and engineering framework** for studying and improving **factual alignment in preference-optimized Large Language Models (LLMs)**.
+**Factuality-aware Direct Preference Optimization** is a **research and engineering framework** for studying and improving **factual alignment in preference-optimized Large Language Models (LLMs)**.
 
 The project introduces **Factual-DPO**, a factuality-aware extension of **Direct Preference Optimization (DPO)** that incorporates:
 
@@ -222,7 +222,7 @@ For dataset-related concerns, please contact the **Skywork authors** via their p
 
 ---
 
-## 📖 Citation (Factual Preference Alignment)
+## 📖 Citation (Factuality-aware Direct Preference Optimization)
 
 If you find this code or dataset useful for your research, please consider citing:
 
@@ -245,6 +245,6 @@ For questions, collaborations, or issues:
 
 ---
 
-### ⚡ Factual DPO promotes in reducing hallucinations and increase factualness
+### ⚡ Factuality-aware Direct Preference Optimization promotes in reducing hallucinations and increase factualness
 
 **We invite researchers and practitioners to build upon this framework.**
