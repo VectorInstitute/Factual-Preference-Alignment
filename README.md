@@ -17,7 +17,7 @@
 
 ## 🧭 About
 
-**Factual Preference Alignment** is a **research and engineering framework** for studying and improving **factual alignment in preference-optimized Large Language Models (LLMs)**.
+**Factuality-aware Direct Preference Optimization** is a **research and engineering framework** for studying and improving **factual alignment in preference-optimized Large Language Models (LLMs)**.
 
 The project introduces **Factual-DPO**, a factuality-aware extension of **Direct Preference Optimization (DPO)** that incorporates:
 
