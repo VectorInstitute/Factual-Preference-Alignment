@@ -222,7 +222,7 @@ For dataset-related concerns, please contact the **Skywork authors** via their p
 
 ---
 
-## 📖 Citation (Factual Preference Alignment)
+## 📖 Citation (Factuality-aware Direct Preference Optimization)
 
 If you find this code or dataset useful for your research, please consider citing:
 
