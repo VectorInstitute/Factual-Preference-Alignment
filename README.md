@@ -229,7 +229,7 @@ If you find this code or dataset useful for your research, please consider citin
 ```bibtex
 @article{FactualAlignment2026,
   title={Reducing Hallucinations in LLMs via Factuality-Aware Preference Learning},
-  author={Sindhuja Chaduvula, Azib Farooq, Ahmed Radwan, Yani Ioannou, Shaina Raza},
+  author={Sindhuja Chaduvula, Ahmed Radwan, Azib Farooq, Yani Ioannou, Shaina Raza},
   journal={arXiv preprint arXiv:XXXX.XXXXX},
   year={2026}
 }
