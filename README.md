@@ -5,16 +5,6 @@
   <img src="docs/assets/factualDPO.png" width="320"/>
 </p>
 
-<p align="center">
-  <b>🌐 Website:</b> <a href="https://vectorinstitute.github.io/factualdpo/">vectorinstitute.github.io/factualdpo</a>  
-  &nbsp;|&nbsp;
-  <b>📄 Paper:</b> <a href="https://arxiv.org/abs/2505.11454">arxiv.org/abs/2505.11454</a>  
-  &nbsp;|&nbsp;
-  <b>📊 Dataset:</b> <a href="https://huggingface.co/datasets/vector-institute/Factuality_Alignment">Hugging Face</a>
-</p>
-
----
-
 ## 🧭 About
 
 **Factuality-aware Direct Preference Optimization** is a **research and engineering framework** for studying and improving **factual alignment in preference-optimized Large Language Models (LLMs)**.
