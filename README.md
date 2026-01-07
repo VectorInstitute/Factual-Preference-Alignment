@@ -8,7 +8,7 @@
 <p align="center">
   <b>🌐 Website:</b> <a href="https://vectorinstitute.github.io/Factual-Preference-Alignment/">vectorinstitute.github.io/Factual-Preference-Alignment</a>  
   &nbsp;|&nbsp;
-  <b>📄 Paper:</b> <a href="https://arxiv.org/abs/2505.11454">arxiv.org/abs/2505.11454</a>  
+  <b>📄 Paper:</b> <a href="https://arxiv.org/abs/2601.03027">arxiv.org/abs/2505.11454</a>  
   &nbsp;|&nbsp;
   <b>📊 Dataset:</b> <a href="https://huggingface.co/datasets/vector-institute/Factuality_Alignment">Hugging Face</a>
 </p>
