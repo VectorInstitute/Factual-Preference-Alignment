@@ -247,4 +247,11 @@ For questions, collaborations, or issues:
 
 ### ⚡ Factuality-aware Direct Preference Optimization promotes in reducing hallucinations and increase factualness
 
+---
+
+## 🙏 Acknowledgments
+Resources used in preparing this research were provided, in part, by the Province of Ontario, the Government of Canada through CIFAR, and companies sponsoring the [Vector Institute](http://www.vectorinstitute.ai/#partners). This research was funded by the European Union’s Horizon Europe research and innovation programme under the AIXPERT project (Grant Agreement No. 101214389), which aims to develop an agentic, multi-layered, GenAI-powered framework for creating explainable, accountable, and transparent AI systems. 
+
+---
+
 **We invite researchers and practitioners to build upon this framework.**
