@@ -1,5 +1,4 @@
 # Reducing Hallucinations in LLMs via Factuality-Aware Preference Learning
-### A Modular Training Framework for Factuality-Aware Direct Preference Optimization(F-DPO)
 
 <p align="center" style="margin-top: -10px; margin-bottom: -10px;">
   <img src="docs/assets/factualDPO.png" width="320"/>
@@ -231,11 +230,12 @@ For dataset-related concerns, please contact the **Skywork authors** via their p
 If you find this code or dataset useful for your research, please consider citing:
 
 ```bibtex
-@inproceedings{FactualAlignment2026,
+@article{chaduvula2026reducing,
   title={Reducing Hallucinations in LLMs via Factuality-Aware Preference Learning},
-  author={Sindhuja Chaduvula and Ahmed Radwan and Azib Farooq and Yani Ioannou and Shaina Raza},
-  booktitle={Findings of the Association for Computational Linguistics: ACL 2026},
+  author={Chaduvula, Sindhuja and Radwan, Ahmed Y and Farooq, Azib and Ioannou, Yani and Raza, Shaina},
+  journal={arXiv preprint arXiv:2601.03027},
   year={2026}
+}
 }
 ```
 ---
