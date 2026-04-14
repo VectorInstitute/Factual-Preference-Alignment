@@ -6,6 +6,10 @@
 </p>
 
 <p align="center">
+  <b>🎉 Accepted at ACL 2026 Findings</b>
+</p>
+
+<p align="center">
   <b>🌐 Website:</b> <a href="https://vectorinstitute.github.io/Factual-Preference-Alignment/">vectorinstitute.github.io/Factual-Preference-Alignment</a>  
   &nbsp;|&nbsp;
   <b>📄 Paper:</b> <a href="https://arxiv.org/abs/2601.03027">arxiv.org/abs/2601.03027</a>  
@@ -227,10 +231,10 @@ For dataset-related concerns, please contact the **Skywork authors** via their p
 If you find this code or dataset useful for your research, please consider citing:
 
 ```bibtex
-@article{FactualAlignment2026,
+@inproceedings{FactualAlignment2026,
   title={Reducing Hallucinations in LLMs via Factuality-Aware Preference Learning},
-  author={Sindhuja Chaduvula, Ahmed Radwan, Azib Farooq, Yani Ioannou, Shaina Raza},
-  journal={arXiv preprint arXiv:2601.03027},
+  author={Sindhuja Chaduvula and Ahmed Radwan and Azib Farooq and Yani Ioannou and Shaina Raza},
+  booktitle={Findings of the Association for Computational Linguistics: ACL 2026},
   year={2026}
 }
 ```
@@ -240,6 +244,7 @@ If you find this code or dataset useful for your research, please consider citin
 
 For questions, collaborations, or issues:
 
+* **Corresponding author:** [Shaina Raza](mailto:shaina.raza@vectorinstitute.ai) (shaina.raza@vectorinstitute.ai)
 * Open a GitHub Issue
 * Or contact the maintainers via the Vector Institute
 
@@ -250,7 +255,7 @@ For questions, collaborations, or issues:
 ---
 
 ## 🙏 Acknowledgments
-Resources used in preparing this research were provided, in part, by the Province of Ontario, the Government of Canada through CIFAR, and companies sponsoring the [Vector Institute](http://www.vectorinstitute.ai/#partners). This research was funded by the European Union’s Horizon Europe research and innovation programme under the AIXPERT project (Grant Agreement No. 101214389), which aims to develop an agentic, multi-layered, GenAI-powered framework for creating explainable, accountable, and transparent AI systems. 
+Resources used in preparing this research were provided, in part, by the Province of Ontario, the Government of Canada through CIFAR, and companies sponsoring the [Vector Institute](http://www.vectorinstitute.ai/#partners). This research was funded by the European Union's Horizon Europe research and innovation programme under the AIXPERT project (Grant Agreement No. 101214389), which aims to develop an agentic, multi-layered, GenAI-powered framework for creating explainable, accountable, and transparent AI systems. 
 
 ---
 
